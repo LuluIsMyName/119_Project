@@ -1,3 +1,4 @@
+
 #requirments: 4 unique shapes, varying colors and sizes, some movement associated with our art, and using loops and if statements to control our drawing
 #make sure to comment on what code you worked on, virak wants this
 #Later on: explain how program works and how we made it
