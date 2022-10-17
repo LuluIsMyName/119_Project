@@ -4,8 +4,8 @@ import tkinter as tk
 import turtle as t
 
 #i've done extensive research on how to perform certain tasks we were not taught yet which is why you might not recognize some of these built in functions
-#the turtle module is a more restricted version of the tkinter module, which is why i'm using tkinter to several windows
-#extensive research is made of reviewing tkinter and turtle documentation along with python documentation on classes
+#the turtle module is a more restricted version of the tkinter module, which is why i'm using tkinter to initiate several windows
+#extensive research was done reviewing tkinter and turtle documentation along with python documentation on classes
 
 #initiates 2 seperate windows
 class Window(Tk): 
