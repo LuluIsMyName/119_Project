@@ -4,7 +4,11 @@ import turtle as t
 from turtle import Turtle, Screen, goto
 
 brush = t.Turtle()
-turtles = ['brush','Init_T', 'Slider_T']
+turtles = ['brush','Init_T']
+brush.shape('square')
+brush.shapesize(150,150)
+r, g, b, a = 100, 100, 100, 0
+brush.fillcolor(r,g,b,a)
 pensize = 1
 wn = t.Screen()
 
@@ -59,6 +63,9 @@ def MousePos(x,y):
             brush.write('too close to the border to produce triangle', align = "center",font = ('Arial', 10, 'normal'))
             #pause for 2 seconds then delete text
             wn.ontimer(brush.undo(), t = 2000)
+    #check if clear button is clicked
+    elif (x > -320 and x < -220 and y < -205 and y > -255):
+        brush.clear()
 
 
 #sets our base turtle color
@@ -224,6 +231,10 @@ def init():
     rectangle(turtles[1], -430, -205, 100, 50, 'black', 1)
     turtles[1].goto(-380, -238.34)
     turtles[1].write('Triangle', align = "center",font = ('Arial', 10, 'normal'))
+    rectangle(turtles[1], -320, -205, 100, 50, 'black', 1)
+    turtles[1].goto(-270, -238.34)
+    turtles[1].write('Clear', align = "center",font = ('Arial', 10, 'normal'))
+
     InitDone = True
     if (InitDone == True):
         turtles[1].hideturtle()
@@ -235,23 +246,51 @@ def init():
 class Slider(Turtle):
     def __init__(self, x, y, color):
         Turtle.__init__(self)
+        #make lines every 25 pixels to show the user where the slider is
         self.color(color)
         self.speed('fastest')
         self.shape('square')
         self.pensize(5)
-        self.shapesize(2,2,2)
+        self.shapesize(1,1,1)
         self.penup()
-        self.goto(125,y)
+        self.goto(112.5,y)
+        self.pencolor('blue')
         self.pendown()
-        self.goto(-125,y)
-        self.ondrag(self.drag)
+        self.goto(-137.5,y)
+        self.penup()
+        for i in range(0, 11):
+            self.goto(-137.5 + (i * 25), y)
+            self.pendown()
+            self.goto(-137.5 + (i * 25), y + 10)
+            self.penup()
+        self.pencolor('black')
+        self.goto(-137.5,-300)
+
+        self.onrelease(self.drag)
     def drag(self, x, y):
-        if(x<=125 and x>=-125):
-            self.setx(x)
+        if(x<=125 and x>=-137.5):
+            x1 = -125
+            i = 1
             global pensize
-            pensize = (self.xcor()+126)
-            print(pensize)
+            if (x < -112.5):
+                self.goto(-137.5,-300)
+                pensize = 1
+            while i < 11:
+                if (x >= x1 and x < x1+25):
+                    self.setx(x1+12.5)
+                    print(i)
+                    pensize = (i * 5)
+                    break
+                else:
+                    x1 += 25
+                i += 1
+            
+            print(x)
+           
+        
 
 #initializes the program and makes the buttons
 init()
+
 wn.mainloop()
+

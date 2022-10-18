@@ -1,5 +1,3 @@
-enup()
-    # turtle.goto(x + (length/2), y - (width/1.5))
-    # x1 = turtle.xcor()
-    # y1 = turtle.ycor()
-    # print('{},{}'.format(x1,y1))
+
+                    x1 += 25
+                i += 1
