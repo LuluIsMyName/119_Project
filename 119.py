@@ -1,12 +1,9 @@
-from cmath import rect
-from pickle import FALSE
 import turtle as t
 from turtle import Turtle, Screen
 
-wn = t.Screen()
-
 brush = t.Turtle()
 turtles = ['brush','Init_T']
+wn = t.Screen()
 
 #free draw function
 def Drag(x,y):
