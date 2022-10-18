@@ -1,9 +1,11 @@
 from asyncore import write
+from turtle import *
 import turtle as t
 from turtle import Turtle, Screen, goto
 
 brush = t.Turtle()
-turtles = ['brush','Init_T']
+turtles = ['brush','Init_T', 'Slider_T']
+pensize = 1
 wn = t.Screen()
 
 def TpTurtle(x,y):
@@ -19,7 +21,7 @@ def MousePos(x,y):
         x1 = brush.xcor()
         y1 = brush.ycor()
         if (y1 >= -100):
-            square(x = x1, y = y1, size = 100, color = colorname, pen_thickness = 1, turtle = brush)
+            square(x = x1, y = y1, size = 100, color = colorname, pen_thickness = pensize, turtle = brush)
         else: 
             brush.write('too close to the border to produce square', align = "center",font = ('Arial', 10, 'normal'))
             #pause for 2 seconds then delete text
@@ -30,7 +32,7 @@ def MousePos(x,y):
         x1 = brush.xcor()
         y1 = brush.ycor()
         if (y1 >= -100):
-            rectangle(x = x1, y = y1, length = 100, width = 50, color = 'black', pen_thickness = 1, turtle = brush)
+            rectangle(x = x1, y = y1, length = 100, width = 50, color = 'black', pen_thickness = pensize, turtle = brush)
         else: 
             brush.write('too close to the border to produce rectangle', align = "center",font = ('Arial', 10, 'normal'))
             #pause for 2 seconds then delete text
@@ -41,7 +43,7 @@ def MousePos(x,y):
         x1 = brush.xcor()
         y1 = brush.ycor()
         if (y1 >= -100):
-            circle(x = x1, y = y1, radius = 50, color = 'black', pen_thickness = 1, turtle = brush)
+            circle(x = x1, y = y1, radius = 50, color = 'black', pen_thickness = pensize, turtle = brush)
         else: 
             brush.write('too close to the border to produce circle', align = "center",font = ('Arial', 10, 'normal'))
             #pause for 2 seconds then delete text
@@ -52,7 +54,7 @@ def MousePos(x,y):
         x1 = brush.xcor()
         y1 = brush.ycor()
         if (y1 >= -100):
-            triangle(x = x1, y = y1, length = 100, color = 'black', pen_thickness = 1, turtle = brush)
+            triangle(x = x1, y = y1, length = 100, color = 'black', pen_thickness = pensize, turtle = brush)
         else: 
             brush.write('too close to the border to produce triangle', align = "center",font = ('Arial', 10, 'normal'))
             #pause for 2 seconds then delete text
@@ -67,10 +69,12 @@ colorname = 'black'
 def Draw(x, y):
     if (y > -200):
         brush.ondrag(None)
+        brush.pensize(pensize)
         brush.pendown()
         brush.setheading(brush.towards(x,y))
         brush.goto(x,y)
         brush.ondrag(Draw)
+        print(pensize)
 
 #allows color to change forwards
 def ColorSwitchRight():
@@ -220,34 +224,34 @@ def init():
     rectangle(turtles[1], -430, -205, 100, 50, 'black', 1)
     turtles[1].goto(-380, -238.34)
     turtles[1].write('Triangle', align = "center",font = ('Arial', 10, 'normal'))
-    slider()
     InitDone = True
     if (InitDone == True):
         turtles[1].hideturtle()
         turtles.remove(turtles[1])
+    mySlider = Slider(-100, -300, 'black')
 
 
 #create a square turtle to use as a slider that the user can drag to change the size of the shape
-def slider():
-    turtles[1] = t.Turtle()
-    turtles[1].penup()
-    turtles[1].goto(-765, -250)
-    turtles[1].pendown()
-    turtles[1].color('black')
-    turtles[1].pensize(1)
-    turtles[1].speed('fastest')
-    turtles[1].goto(-765, -240)
-    turtles[1].goto(765, -240)
-    turtles[1].goto(765, -250)
-    turtles[1].goto(-765, -250)
-    turtles[1].penup()
-    turtles[1].goto(-765, -255)
-    turtles[1].write('Size', align = "center",font = ('Arial', 10, 'normal'))
-    turtles[1].goto(765, -255)
-    turtles[1].write('Size', align = "center",font = ('Arial', 10, 'normal'))
-    turtles[1].hideturtle()
+class Slider(Turtle):
+    def __init__(self, x, y, color):
+        Turtle.__init__(self)
+        self.color(color)
+        self.speed('fastest')
+        self.shape('square')
+        self.pensize(5)
+        self.shapesize(2,2,2)
+        self.penup()
+        self.goto(125,y)
+        self.pendown()
+        self.goto(-125,y)
+        self.ondrag(self.drag)
+    def drag(self, x, y):
+        if(x<=125 and x>=-125):
+            self.setx(x)
+            global pensize
+            pensize = (self.xcor()+126)
+            print(pensize)
 
 #initializes the program and makes the buttons
 init()
-
 wn.mainloop()
