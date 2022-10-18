@@ -1,106 +1,142 @@
-from turtle import *
-from tkinter import *
-import tkinter as tk
+from cmath import rect
+from pickle import FALSE
 import turtle as t
+from turtle import Turtle, Screen
 
-#i've done extensive research on how to perform certain tasks we were not taught yet which is why you might not recognize some of these built in functions
-#the turtle module is a more restricted version of the tkinter module, which is why i'm using tkinter to several windows
-#extensive research is made of reviewing tkinter and turtle documentation along with python documentation on classes
+wn = t.Screen()
 
-#initiates 2 seperate windows
-class Window(Tk): 
-    def __init__(self, title, geometry):
-        super().__init__() 
-        self.running = True
-        self.geometry(geometry) 
-        self.title(title) 
-        self.protocol("WM_DELETE_WINDOW", self.destroy_window) 
-        self.canvas = Canvas(self)
-        self.canvas.pack(side=LEFT, expand=True, fill=BOTH)
-        self.turtle = RawTurtle(TurtleScreen(self.canvas))
+brush = t.Turtle()
+turtles = ['brush','Init_T']
 
-
-    def update_window(self): #updates the window
-        if self.running:
-            self.update()
-
-    def destroy_window(self): #destroys the window
-        self.running = False
-        self.destroy()
-
-
-# create windows
-win1 = Window('Turtle Window 1', '640x480')
-win2 = Window('Turtle Window 2', '640x480+650+0')
-
-# assign turtles
-t1 = win1.turtle
-t2 = win2.turtle
-t1.shape('circle')
-t1.shapesize(0.5,0.5,0.5)
-
-def t2rectangle(x, y, width, height, color):
-    t2.fillcolor(color)
-    t2.begin_fill()
-    t2.goto(x, y)
-    t2.goto(x + width, y)
-    t2.goto(x + width, y + height)
-    t2.goto(x, y + height)
-    t2.goto(x, y)
-    t2.end_fill()
-def t2circle(x, y, radius, color):
-    t2.fillcolor(color)
-    t2.begin_fill()
-    t2.goto(x, y)
-    t2.circle(radius)
-    t2.end_fill()
-def t2triangle(x, y, width, height, color):
-    t2.fillcolor(color)
-    t2.begin_fill()
-    t2.goto(x, y)
-    t2.goto(x + width, y)
-    t2.goto(x + width, y + height)
-    t2.goto(x, y)
-    t2.end_fill()
-def t2square(x, y, width, color):
-    t2.fillcolor(color)
-    t2.begin_fill()
-    t2.goto(x, y)
-    t2.goto(x + width, y)
-    t2.goto(x + width, y + width)
-    t2.goto(x, y + width)
-    t2.goto(x, y)
-    t2.end_fill()
-
-#draws when turtle dragged
+#free draw function
 def Drag(x,y):
-    t1.ondrag(None)
-    t1.setheading(t1.towards(x,y)) 
-    t1.goto(x,y) 
-    t1.ondrag(Drag) 
+    brush.ondrag(None)
+    brush.setheading(brush.towards(x,y))
+    brush.goto(x,y)
+    brush.ondrag(Drag)
 
-#when window 2 is clicked checks if clicked on box
-def Win2Click(x,y):
-    t2.goto(x,y)
-    if (t2.xcor() > 0 and t2.xcor() < 100 and t2.ycor() > 0 and t2.ycor() < 100):
-        t2.write("You clicked the red box", font=("Arial", 16, "normal"))
+def TpTurtle(x,y):
+    turtles[1].penup()
+    turtles[1].goto(x,y)
+    turtles[1].pendown()
 
-#turtle calls Drag function when dragged
-t1.ondrag(Drag)
+def MousePos(x,y):
+    print('{},{}'.format(x,y))
+color = 1
+def ColorSwitchRight():
+    global color
+    if color == 1:
+        brush.color('blue')
+        print('blue')
+        color = 2
+    elif color == 2:
+        brush.color('green')
+        print('green')
+        color = 3
+    elif color == 3:
+        brush.color('red')
+        print('red')
+        color = 4
+    elif color == 4:
+        brush.color('black')
+        print('black')
+        color = 1
 
-def Turtle2Pos(x,y):
-    print('{}, {}'.format(x, y))
-    t2square(x, y, 100, 'red')
-t2.screen.onclick(Turtle2Pos)
+def ColorSwitchLeft():
+    global color
+    if color == 1:
+        brush.color('red')
+        print('red')
+        color = 4
+    elif color == 2:
+        brush.color('black')
+        print('black')
+        color = 1
+    elif color == 3:
+        brush.color('blue')
+        print('blue')
+        color = 2
+    elif color == 4:
+        brush.color('green')
+        print('green')
+        color = 3
 
+wn.listen()
+wn.onclick(MousePos, 1)
+wn.onkey(TpTurtle, 'space')
+wn.onkey(ColorSwitchRight, 'Right')
+wn.onkey(ColorSwitchLeft, 'Left')
+
+
+def Draw(x, y):
+    brush.ondrag(None)
+    brush.setheading(brush.towards(x,y))
+    brush.goto(x,y)
+    brush.ondrag(Draw)
+
+#square function
+def square(turtle,x,y, size, color, pen_thickness):
+    turtle.penup()
+    turtle.goto(x,y)
+    turtle.pendown()
+    turtle.color(color)
+    turtle.pensize(pen_thickness)
+    for i in range(4):
+        turtle.forward(size)
+        turtle.right(90)
+    turtle.penup()
+    turtle.goto(x + (size/2), y - (size/3))
+
+def rectangle(turtle, x, y, length, width, color, pen_thickness):
+    turtle.penup()
+    turtle.goto(x,y)
+    turtle.setheading(0)
+    turtle.pendown()
+    turtle.color(color)
+    turtle.pensize(pen_thickness)
+    for i in range(2):
+        turtle.forward(length)
+        turtle.right(90)
+        turtle.forward(width)
+        turtle.right(90)
+    turtle.penup()
+    turtle.goto(x + (length/2), y - (width/1.5))
+#circle function
+def circle(turtle,x,y, radius, color, pen_thickness):
+    turtle.penup()
+    turtle.goto(x,y)
+    turtle.pendown()
+    turtle.color(color)
+    turtle.pensize(pen_thickness)
+    turtle.circle(radius)
+
+def init():
+    InitDone = False
+    turtles[1] = t.Turtle()
+    turtles[1].penup()
+    turtles[1].goto(-770,-200)
+    turtles[1].pendown()
+    turtles[1].color('black')
+    turtles[1].pensize(1)
+    turtles[1].speed('fastest')
+    turtles[1].goto(765,-200)
+    rectangle(turtles[1], -760, -205, 100, 50, 'black', 1)
+    turtles[1].write('Square', align = "center",font = ('Arial', 10, 'normal'))
+    InitDone = True
+    if (InitDone == True):
+        turtles[1].hideturtle()
+        turtles.remove(turtles[1])
+
+#lets window listen to mouse inputs
 
 
 #sets turtle speed to fastest
-t1.speed('fastest') 
-t2.speed('fastest')
+brush.speed('fastest')
 
-# update windows (the mainloop)
-while win1.running or win2.running:
-    win1.update_window()
-    win2.update_window()
+#lets turtle to draw when dragged
+brush.ondrag(Drag)
 
+#initializes the program and makes the buttons
+init()
+
+wn.mainloop()

@@ -1,1 +1,3 @@
-        self.protocol("WM_DELETE_WINDOW", self.destroy_window) 
+def func(i, j):
+  brush.goto(i, j)
+  brush.write(str(i)+","+str(j))
