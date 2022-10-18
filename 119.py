@@ -19,15 +19,49 @@ def MousePos(x,y):
         x1 = brush.xcor()
         y1 = brush.ycor()
         if (y1 >= -100):
-            square(x = x1, y = y1, size = 100, color = 'black', pen_thickness = 1, turtle = brush)
+            square(x = x1, y = y1, size = 100, color = colorname, pen_thickness = 1, turtle = brush)
         else: 
             brush.write('too close to the border to produce square', align = "center",font = ('Arial', 10, 'normal'))
+            #pause for 2 seconds then delete text
+            wn.ontimer(brush.undo(), t = 2000)
+    #check if rectangle button is clicked
+    elif (x > -540 and x < -440 and y < -205 and y > -255):
+        #save turtle x and y position as variables
+        x1 = brush.xcor()
+        y1 = brush.ycor()
+        if (y1 >= -100):
+            rectangle(x = x1, y = y1, length = 100, width = 50, color = 'black', pen_thickness = 1, turtle = brush)
+        else: 
+            brush.write('too close to the border to produce rectangle', align = "center",font = ('Arial', 10, 'normal'))
+            #pause for 2 seconds then delete text
+            wn.ontimer(brush.undo(), t = 2000)
+    #check if circle button is clicked
+    elif (x > -650 and x < -550 and y < -205 and y > -255):
+        #save turtle x and y position as variables
+        x1 = brush.xcor()
+        y1 = brush.ycor()
+        if (y1 >= -100):
+            circle(x = x1, y = y1, radius = 50, color = 'black', pen_thickness = 1, turtle = brush)
+        else: 
+            brush.write('too close to the border to produce circle', align = "center",font = ('Arial', 10, 'normal'))
+            #pause for 2 seconds then delete text
+            wn.ontimer(brush.undo(), t = 2000)
+    #check if triangle button is clicked
+    elif (x > -430 and x < -330 and y < -205 and y > -255):
+        #save turtle x and y position as variables
+        x1 = brush.xcor()
+        y1 = brush.ycor()
+        if (y1 >= -100):
+            triangle(x = x1, y = y1, length = 100, color = 'black', pen_thickness = 1, turtle = brush)
+        else: 
+            brush.write('too close to the border to produce triangle', align = "center",font = ('Arial', 10, 'normal'))
             #pause for 2 seconds then delete text
             wn.ontimer(brush.undo(), t = 2000)
 
 
 #sets our base turtle color
 color = 1
+colorname = 'black'
 
 #freedraw function
 def Draw(x, y):
@@ -41,39 +75,49 @@ def Draw(x, y):
 #allows color to change forwards
 def ColorSwitchRight():
     global color
+    global colorname
     if color == 1:
         brush.color('blue')
+        colorname = 'blue'
         print('blue')
         color = 2
     elif color == 2:
         brush.color('green')
+        colorname = 'green'
         print('green')
         color = 3
     elif color == 3:
         brush.color('red')
+        colorname = 'red'
         print('red')
         color = 4
     elif color == 4:
         brush.color('black')
+        colorname = 'black'
         print('black')
         color = 1
 #allows color to change backwards
 def ColorSwitchLeft():
     global color
+    global colorname
     if color == 1:
         brush.color('red')
+        colorname = 'red'
         print('red')
         color = 4
     elif color == 2:
         brush.color('black')
+        colorname = 'black'
         print('black')
         color = 1
     elif color == 3:
         brush.color('blue')
+        colorname = 'blue'
         print('blue')
         color = 2
     elif color == 4:
         brush.color('green')
+        colorname = 'green'
         print('green')
         color = 3
 
@@ -89,7 +133,7 @@ wn.onclick(MousePos, 1)
 #when right click is pressed TpTurtle is called
 wn.onclick(TpTurtle, 3)
 
-#on 
+#changes color when right or left arrow pressed
 wn.onkey(ColorSwitchRight, 'Right')
 wn.onkey(ColorSwitchLeft, 'Left')
 
@@ -176,10 +220,32 @@ def init():
     rectangle(turtles[1], -430, -205, 100, 50, 'black', 1)
     turtles[1].goto(-380, -238.34)
     turtles[1].write('Triangle', align = "center",font = ('Arial', 10, 'normal'))
+    slider()
     InitDone = True
     if (InitDone == True):
         turtles[1].hideturtle()
         turtles.remove(turtles[1])
+
+
+#create a square turtle to use as a slider that the user can drag to change the size of the shape
+def slider():
+    turtles[1] = t.Turtle()
+    turtles[1].penup()
+    turtles[1].goto(-765, -250)
+    turtles[1].pendown()
+    turtles[1].color('black')
+    turtles[1].pensize(1)
+    turtles[1].speed('fastest')
+    turtles[1].goto(-765, -240)
+    turtles[1].goto(765, -240)
+    turtles[1].goto(765, -250)
+    turtles[1].goto(-765, -250)
+    turtles[1].penup()
+    turtles[1].goto(-765, -255)
+    turtles[1].write('Size', align = "center",font = ('Arial', 10, 'normal'))
+    turtles[1].goto(765, -255)
+    turtles[1].write('Size', align = "center",font = ('Arial', 10, 'normal'))
+    turtles[1].hideturtle()
 
 #initializes the program and makes the buttons
 init()
