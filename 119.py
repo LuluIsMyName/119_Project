@@ -24,6 +24,7 @@ brush.shape('circle')
 pensize = 1
 shapesize = 100
 
+InitDone = False
 ShapeSpawnClick = False
 SpawnSquare = False
 SpawnTriangle = False
@@ -38,11 +39,12 @@ RectangleLength = 100
 RectangleWidth = 100
 CircleSize = 100
 TriangleSize = 100
-Rectangle = RectangleLength
+RectangleSize = RectangleLength
+RectangleSizeMod = 'Length'
 
 #do this
 #if(LengthActive == True):
-    #Rectangle Length = etc
+    #Rectangle Length = etcS
     #clear RectangleT
     #wriite "Rectangle Length = etc etc"
 #elif(WidthActive == True):
@@ -97,6 +99,7 @@ def MousePos(x,y):
     global RectangleLength
     global RectangleWidth
     global TriangleSize
+    global RectangleSize
     if (x > -760 and x < -660 and y < -205 and y > -255):
 
  
@@ -170,109 +173,126 @@ def MousePos(x,y):
     #check square sizer
 
     #check if square size -1 button is clicked
-    elif (x > 45 and x < 115 and y < -260 and y > -310):
+    elif (x > 45 and x < 115 and y < 330 and y > 280):
         SquareSize -= 1
         print(SquareSize)
         turtles[1].clear()
         turtles[1].write("Square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
     #check if square size +1 button is clicked
-    elif (x > 125 and x < 195 and y < -260 and y > -310):
+    elif (x > 125 and x < 195 and y < 330 and y > 280):
         SquareSize += 1
         print(SquareSize)
         turtles[1].clear()
         turtles[1].write("Square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
     #check if square size -10 button is clicked
-    elif (x > 45 and x < 115 and y < -315 and y > -365):
+    elif (x > 45 and x < 115 and y < 275 and y > 225):
         SquareSize -= 10
         print(SquareSize)
         turtles[1].clear()
         turtles[1].write("Square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
     #check if square size +10 button is clicked
-    elif (x > 125 and x < 195 and y < -315 and y > -365):
+    elif (x > 125 and x < 195 and y < 275 and y > 225):
         SquareSize += 10
         print(SquareSize)
         turtles[1].clear()
         turtles[1].write("Square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
     
+    
+
+    #check circle sizer
+    #check if circle size -1 button is clicked
+    elif (x > 205 and x < 275 and y < 330 and y > 280):
+        CircleSize -= 1
+        print(CircleSize)
+        turtles[3].clear()
+        turtles[3].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if circle size +1 button is clicked
+    elif (x > 285 and x < 355 and y < 330 and y > 280):
+        CircleSize += 1
+        print(CircleSize)
+        turtles[3].clear()
+        turtles[3].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if circle size -10 button is clicked
+    elif (x > 205 and x < 275 and y < 275 and y > 225):
+        CircleSize -= 10
+        print(CircleSize)
+        turtles[3].clear()
+        turtles[3].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if circle size +10 button is clicked
+    elif (x > 285 and x < 355 and y < 275 and y > 225):
+        CircleSize += 10
+        print(CircleSize)
+        turtles[3].clear()
+        turtles[3].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
+
+    #check rectangle sizer
+
+    #check if changing from rectangle width to rectangle length
+    elif (x > 365 and x < 515 and y < 220 and y > 170): 
+        if (RectangleSize == RectangleLength):
+            RectangleSize = RectangleWidth
+            RectangleSizeMod = 'Width'
+            turtles[3].clear()
+            turtles[3].write("Rectangle Width " + str(RectangleSize), align = "center",font = ('Arial', 10, 'normal'))
+        else:
+            RectangleSize = RectangleLength
+            RectangleSizeMod = 'Length'
+            turtles[3].clear()
+            turtles[3].write("Rectangle Length " + str(RectangleSize), align = "center",font = ('Arial', 10, 'normal'))
+            
+    #check if rectangle size -1 button is clicked
+    elif (x > 365 and x < 435 and y < 330 and y > 280):
+        RectangleSize -= 1
+        print(RectangleSize)
+        turtles[2].clear()
+        turtles[2].write(RectangleSizeMod + str(RectangleSize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if rectangle size +1 button is clicked
+    elif (x > 445 and x < 515 and y < 330 and y > 280):
+        RectangleSize += 1
+        print(RectangleSize)
+        turtles[2].clear()
+        turtles[2].write(RectangleSizeMod + str(RectangleSize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if rectangle size -10 button is clicked
+    elif (x > 365 and x < 435 and y < 275 and y > 225):
+        RectangleSize -= 10
+        print(RectangleSize)
+        turtles[2].clear()
+        turtles[2].write(RectangleSizeMod + str(RectangleSize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if rectangle size +10 button is clicked
+    elif (x > 445 and x < 515 and y < 275 and y > 225):
+        RectangleSize += 10
+        print(RectangleSize)
+        turtles[2].clear()
+        turtles[2].write(RectangleSizeMod + str(RectangleSize), align = "center",font = ('Arial', 10, 'normal'))
+    
     #check triangle sizer
     
     #check if TriangleSize -1 button is clicked
-    elif (x > 510 and x < 580 and y < -260 and y > -310):
+    elif (x > 510 and x < 580 and y < 330 and y > 280):
         TriangleSize -= 1
         print(TriangleSize)
         turtles[4].clear()
         turtles[4].write("Triangle Size " + str(TriangleSize), align = "center",font = ('Arial', 10, 'normal'))
     #check if TriangleSize +1 button is clicked
-    elif (x > 590 and x < 660 and y < -260 and y > -310):
+    elif (x > 590 and x < 660 and y < 330 and y > 280):
         TriangleSize += 1
         print(TriangleSize)
         turtles[4].clear()
         turtles[4].write("Triangle Size " + str(TriangleSize), align = "center",font = ('Arial', 10, 'normal'))
     #check if triangle size -10 button is clicked
-    elif (x > 510 and x < 580 and y < -315 and y > -365):
+    elif (x > 510 and x < 580 and y < 275 and y > 225):
         TriangleSize -= 10
         print(TriangleSize)
         turtles[4].clear()
         turtles[4].write("Triangle Size " + str(TriangleSize), align = "center",font = ('Arial', 10, 'normal'))
     #check if triangle size +10 button is clicked
-    elif (x > 590 and x < 660 and y < 225 and y > -365):
+    elif (x > 590 and x < 660 and y < 275 and y > 225):
         TriangleSize += 10
         print(TriangleSize)
         turtles[4].clear()
         turtles[4].write("Triangle Size " + str(TriangleSize), align = "center",font = ('Arial', 10, 'normal'))
 
-    #check circle sizer
-    #check if circle size -1 button is clicked
-    elif (x > 205 and x < 275 and y < -260 and y > -310):
-        CircleSize -= 1
-        print(CircleSize)
-        turtles[2].clear()
-        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
-    #check if circle size +1 button is clicked
-    elif (x > 285 and x < 355 and y < -260 and y > -310):
-        CircleSize += 1
-        print(CircleSize)
-        turtles[2].clear()
-        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
-    #check if circle size -10 button is clicked
-    elif (x > 205 and x < 275 and y < -315 and y > -365):
-        CircleSize -= 10
-        print(CircleSize)
-        turtles[2].clear()
-        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
-    #check if circle size +10 button is clicked
-    elif (x > 285 and x < 355 and y < -225 and y > -365):
-        CircleSize += 10
-        print(CircleSize)
-        turtles[2].clear()
-        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
-
-    #check rectangle sizer
-    #check if rectangle size -1 button is clicked
-    elif (x > 205 and x < 275 and y < -260 and y > -310):
-        CircleSize -= 1
-        print(CircleSize)
-        turtles[2].clear()
-        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
-    #check if circle size +1 button is clicked
-    elif (x > 285 and x < 355 and y < -260 and y > -310):
-        CircleSize += 1
-        print(CircleSize)
-        turtles[2].clear()
-        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
-    #check if circle size -10 button is clicked
-    elif (x > 205 and x < 275 and y < -315 and y > -365):
-        CircleSize -= 10
-        print(CircleSize)
-        turtles[2].clear()
-        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
-    #check if circle size +10 button is clicked
-    elif (x > 285 and x < 355 and y < -225 and y > -365):
-        CircleSize += 10
-        print(CircleSize)
-        turtles[2].clear()
-        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
-    
+        
 #freedraw function
 def Draw(x, y):
     if (y > -200):
@@ -446,32 +466,32 @@ def triangle(turtle, x, y, length, color, pen_thickness):
 
 #initializes the program and sets up buttons
 def init():
-    InitDone = False
+    global InitDone
     turtles[1] = t.Turtle()
     turtles[1].penup()
-    turtles[1].goto(-770,-200)
+    turtles[1].goto(-770, 160)
     turtles[1].pendown()
     turtles[1].color('black')
     turtles[1].pensize(1)
     turtles[1].speed('fastest')
-    turtles[1].goto(765,-200)
-    rectangle(turtles[1], -760, -205, 100, 50, 'black', 1)
-    turtles[1].goto(-710, -238.34)
+    turtles[1].goto(765,160)
+    rectangle(turtles[1], -760, 385, 100, 50, 'black', 1)
+    turtles[1].goto(-710, 351.66)
     turtles[1].write('Square', align = "center",font = ('Arial', 10, 'normal'))
-    rectangle(turtles[1], -650, -205, 100, 50, 'black', 1)
-    turtles[1].goto(-600, -238.34)
+    rectangle(turtles[1], -650, 385, 100, 50, 'black', 1)
+    turtles[1].goto(-600, 351.66)
     turtles[1].write('Circle', align = "center",font = ('Arial', 10, 'normal'))
-    rectangle(turtles[1], -540, -205, 100, 50, 'black', 1)
-    turtles[1].goto(-490, -238.34)
+    rectangle(turtles[1], -540, 385, 100, 50, 'black', 1)
+    turtles[1].goto(-490, 351.66)
     turtles[1].write('Rectangle', align = "center",font = ('Arial', 10, 'normal'))
-    rectangle(turtles[1], -430, -205, 100, 50, 'black', 1)
-    turtles[1].goto(-380, -238.34)
+    rectangle(turtles[1], -430, 385, 100, 50, 'black', 1)
+    turtles[1].goto(-380, 351.66)
     turtles[1].write('Triangle', align = "center",font = ('Arial', 10, 'normal'))
-    rectangle(turtles[1], -320, -205, 100, 50, 'black', 1)
-    turtles[1].goto(-270, -238.34)
+    rectangle(turtles[1], -320, 385, 100, 50, 'black', 1)
+    turtles[1].goto(-270, 351.66)
     turtles[1].write('Clear', align = "center",font = ('Arial', 10, 'normal'))
-    rectangle(turtles[1], -210, -205, 100, 50, 'black', 1)
-    turtles[1].goto(-160, -238.34)
+    rectangle(turtles[1], -210, 385, 100, 50, 'black', 1)
+    turtles[1].goto(-160, 351.66)
     turtles[1].write('Undo', align = "center",font = ('Arial', 10, 'normal'))
     
 
@@ -480,38 +500,38 @@ def init():
         shapetype = (i - 2) * 155
         turtles[i].hideturtle()
         turtles[i].penup()
-        turtles[i].goto(120 + shapetype, -238.34)
-        shape = ['Square', 'Circle', 'Rectangle', 'Triangle']
-        rectangle(turtles[1], 45 + shapetype, -205, 150, 50, 'black', 1)
-        turtles[i].write(shape[i-2] + ' Size ' + str(shapesize), align = "center",font = ('Arial', 10, 'normal'))
-        rectangle(turtles[1], 45 + shapetype, -260, 70, 50, 'black', 1)
-        turtles[1].goto(80 + shapetype, -293.34)
+        turtles[i].goto(120 + shapetype, 351.66)
+        shape = ['Square Size', 'Circle Size', 'Rectangle Length', 'Triangle Size']
+        rectangle(turtles[1], 45 + shapetype, 385, 150, 50, 'black', 1)
+        turtles[i].write(shape[i-2] + str(shapesize), align = "center",font = ('Arial', 10, 'normal'))
+        rectangle(turtles[1], 45 + shapetype, 330, 70, 50, 'black', 1)
+        turtles[1].goto(80 + shapetype, 296.66)
         turtles[1].write('-1', align = "center",font = ('Arial', 10, 'normal'))
-        rectangle(turtles[1], 125 + shapetype, -260, 70, 50, 'black', 1)
-        turtles[1].goto(160 + shapetype, -293.34)
+        rectangle(turtles[1], 125 + shapetype, 330, 70, 50, 'black', 1)
+        turtles[1].goto(160 + shapetype, 296.66)
         turtles[1].write('+1', align = "center",font = ('Arial', 10, 'normal'))
-        rectangle(turtles[1], 45 + shapetype, -315, 70, 50, 'black', 1)
-        turtles[1].goto(80 + shapetype, -348.34)
+        rectangle(turtles[1], 45 + shapetype, 275, 70, 50, 'black', 1)
+        turtles[1].goto(80 + shapetype, 241.66)
         turtles[1].write('-10', align = "center",font = ('Arial', 10, 'normal'))
-        rectangle(turtles[1], 125 + shapetype, -315, 70, 50, 'black', 1)
-        turtles[1].goto(160 + shapetype, -348.34)
+        rectangle(turtles[1], 125 + shapetype, 275, 70, 50, 'black', 1)
+        turtles[1].goto(160 + shapetype, 241.66)
         turtles[1].write('+10', align = "center",font = ('Arial', 10, 'normal'))
-        # rectangle(turtles[1], 45 + shapetype, -370, 150, 50, 'black', 1)
-        # turtles[1].goto(120 + shapetype, -403.34)
-        # turtles[1].write('Square', align = "center",font = ('Arial', 10, 'normal'))
+    rectangle(turtles[1], 355, 220, 150, 50, 'black', 1)
+    turtles[1].goto(430, 186.66)
+    turtles[1].write('Length/Width', align = "center",font = ('Arial', 10, 'normal'))
     
     InitDone = True
+    print('init done')
     if (InitDone == True):
         turtles[1].hideturtle()
         turtles.remove(turtles[1])
-    mySlider = Slider(-100, -300, 'black')
+    mySlider = Slider(-100, 290, 'black')
 
 
 #create a square turtle to use as a slider that the user can drag to change the size of the shape
 class Slider(Turtle):
     def __init__(self, x, y, color):
         Turtle.__init__(self)
-        #make lines every 25 pixels to show the user where the slider is
         self.color(color)
         self.speed('fastest')
         self.shape('square')
@@ -529,7 +549,7 @@ class Slider(Turtle):
             self.goto(-300 + (i * 25), y + 10)
             self.penup()
         self.pencolor('black')
-        self.goto(-300,-300)
+        self.goto(-300,290)
 
         self.onrelease(self.drag)
     def drag(self, x, y):
@@ -538,7 +558,7 @@ class Slider(Turtle):
             i = 1
             global pensize
             if (x < -275):
-                self.goto(-300,-300)
+                self.goto(-300,290)
                 pensize = 1
             while i < 11:
                 if (x >= x1 and x < x1+25):
@@ -556,21 +576,22 @@ class Slider(Turtle):
             print(x)
 
 def mouseClicked(x,y):
-    if (ShapeSpawnClick == True):
-        if (SpawnSquare == True):
-            print('square')
-            print('{},{}'.format(x,y))
-            SquareSpawn(brush,x,y,shapesize)
-        elif (SpawnCircle == True):
-            CircleSpawn(x,y)
-        elif (SpawnRectangle == True):
-            print('Rectangle')
-            print('{},{}'.format(x,y))
-            RectangleSpawn(x,y)
-        elif (SpawnTriangle == True):
-            TriangleSpawn(x,y)
-    else:
-        MousePos(x,y)
+    if (InitDone == True):
+        if (ShapeSpawnClick == True):
+            if (SpawnSquare == True):
+                print('square')
+                print('{},{}'.format(x,y))
+                SquareSpawn(brush,x,y,shapesize)
+            elif (SpawnCircle == True):
+                CircleSpawn(x,y)
+            elif (SpawnRectangle == True):
+                print('Rectangle')
+                print('{},{}'.format(x,y))
+                RectangleSpawn(brush,x,y,length=100,width=50)
+            elif (SpawnTriangle == True):
+                TriangleSpawn(x,y)
+        else:
+            MousePos(x,y)
 
 #on click return cordinates
 wn.onclick(mouseClicked)
