@@ -1,3 +1,2 @@
-
-                    x1 += 25
-                i += 1
+    writeT.undo()
+    writeT.ht()

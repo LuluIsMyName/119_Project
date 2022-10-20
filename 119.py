@@ -3,14 +3,49 @@ from turtle import *
 import turtle as t
 from turtle import Turtle, Screen, goto
 
-brush = t.Turtle()
-turtles = ['brush','Init_T']
-brush.shape('square')
-brush.shapesize(150,150)
-r, g, b, a = 100, 100, 100, 0
-brush.fillcolor(r,g,b,a)
-pensize = 1
 wn = t.Screen()
+
+brush = t.Turtle()
+writeT = Turtle()
+writeT.penup()
+writeT.goto(-80, -250)
+turtles = ['brush','Init_T']
+brush.shape('circle')
+# brush.shapesize(150,150)
+# r, g, b, a = 100, 100, 100, 0
+# brush.fillcolor(r,g,b,a)
+
+pensize = 1
+
+ShapeSpawnClick = False
+SpawnSquare = False
+SpawnTriangle = False
+SpawnRectangle = False
+SpawnCircle = False
+
+#sets our base turtle color
+color = 1
+colorname = 'black'
+
+
+#enables window to listen for input
+wn.listen()
+
+#sets turtles speed to fastest
+brush.speed('fastest')
+writeT.speed('fastest')
+
+def undoB(e):
+    i = 0
+    while i < e:
+        brush.undo()
+        i += 1
+
+def undoW(e):
+    i = 0
+    while i < e:
+        writeT.undo()
+        i += 1
 
 def TpTurtle(x,y):
     if (y > -200):
@@ -21,15 +56,30 @@ def MousePos(x,y):
     print('{},{}'.format(x,y))
     #check if square button is clicked
     if (x > -760 and x < -660 and y < -205 and y > -255):
+        global ShapeSpawnClick
+        global SpawnSquare
+        global SpawnCircle
+        global SpawnRectangle
+        global SpawnTriangle
+
         #save turtle x and y position as variables
         x1 = brush.xcor()
         y1 = brush.ycor()
-        if (y1 >= -100):
-            square(x = x1, y = y1, size = 100, color = colorname, pen_thickness = pensize, turtle = brush)
-        else: 
-            brush.write('too close to the border to produce square', align = "center",font = ('Arial', 10, 'normal'))
-            #pause for 2 seconds then delete text
-            wn.ontimer(brush.undo(), t = 2000)
+
+        ShapeSpawnClick = True
+        SpawnSquare = True
+        SpawnCircle = False
+        SpawnTriangle = False
+        SpawnRectangle = False
+
+        writeT.goto(50,-240)
+        writeT.write('Click on the canvas to draw square', align = "center",font = ('Arial', 10, 'normal'))
+        # if (y1 >= -100):
+        #     square(x = x1, y = y1, size = 100, color = colorname, pen_thickness = pensize, turtle = brush)
+        # else: 
+        #     brush.write('too close to the border to produce square', align = "center",font = ('Arial', 10, 'normal'))
+        #     #pause for 2 seconds then delete text
+        #     wn.ontimer(brush.undo(), t = 2000)
     #check if rectangle button is clicked
     elif (x > -540 and x < -440 and y < -205 and y > -255):
         #save turtle x and y position as variables
@@ -40,7 +90,7 @@ def MousePos(x,y):
         else: 
             brush.write('too close to the border to produce rectangle', align = "center",font = ('Arial', 10, 'normal'))
             #pause for 2 seconds then delete text
-            wn.ontimer(brush.undo(), t = 2000)
+            wn.ontimer(undoB(1), t = 2000)
     #check if circle button is clicked
     elif (x > -650 and x < -550 and y < -205 and y > -255):
         #save turtle x and y position as variables
@@ -51,7 +101,7 @@ def MousePos(x,y):
         else: 
             brush.write('too close to the border to produce circle', align = "center",font = ('Arial', 10, 'normal'))
             #pause for 2 seconds then delete text
-            wn.ontimer(brush.undo(), t = 2000)
+            wn.ontimer(undoB(1), t = 2000)
     #check if triangle button is clicked
     elif (x > -430 and x < -330 and y < -205 and y > -255):
         #save turtle x and y position as variables
@@ -66,11 +116,12 @@ def MousePos(x,y):
     #check if clear button is clicked
     elif (x > -320 and x < -220 and y < -205 and y > -255):
         brush.clear()
+    #check if undo button is clicked
+    elif (x > -210 and x < -110 and y < -205 and y > -255):
+        i = 0
+        undoB(5)
 
 
-#sets our base turtle color
-color = 1
-colorname = 'black'
 
 #freedraw function
 def Draw(x, y):
@@ -132,37 +183,41 @@ def ColorSwitchLeft():
         print('green')
         color = 3
 
-#enables window to listen for input
-wn.listen()
+# #square function
+# def square(turtle,x,y, size, color, pen_thickness):
+#     global clicked
+#     turtle.penup()
+#     writeT.goto(50,-240)
+#     writeT.write('Click on the canvas to draw square', align = "center",font = ('Arial', 10, 'normal'))
 
-#sets turtle speed to fastest
-brush.speed('fastest')
+#     clicked = False
+#     while clicked == False:
+#         wn.onclick(SquareSpawn)
+#     MousePos(x,y)
+#     # while (clicked != True):
+#     #   
+#     # turtle.goto(x + (size/2), y - (size/1.5))
 
-#on click return cordinates
-wn.onclick(MousePos, 1)
-
-#when right click is pressed TpTurtle is called
-wn.onclick(TpTurtle, 3)
-
-#changes color when right or left arrow pressed
-wn.onkey(ColorSwitchRight, 'Right')
-wn.onkey(ColorSwitchLeft, 'Left')
-
-#lets turtle to draw when dragged
-brush.ondrag(Draw)
-
-#square function
-def square(turtle,x,y, size, color, pen_thickness):
-    turtle.penup()
-    turtle.goto(x,y)
-    turtle.pendown()
-    turtle.color(color)
-    turtle.pensize(pen_thickness)
-    for i in range(4):
-        turtle.forward(size)
-        turtle.right(90)
-    turtle.penup()
-    # turtle.goto(x + (size/2), y - (size/1.5))
+def SquareSpawn(turtle,x,y, size):
+    global ShapeSpawnClick
+    turtle.setheading(0)
+    turtle.pensize(pensize)
+    minY = -200 + size
+    if (y > minY):
+        turtle.penup()
+        turtle.goto(x,y)
+        turtle.pendown()
+        for i in range(4):
+            turtle.forward(size)
+            turtle.right(90)
+        turtle.penup()
+        undoW(1)
+        ShapeSpawnClick = False
+    else:
+        writeT.goto(x,y+20)
+        writeT.write('too close to the border to produce square', align = "center",font = ('Arial', 10, 'normal'))
+        #pause for 2 seconds then delete text
+        wn.ontimer(undoW(2), t = 1000)
 
 #rectangle function
 def rectangle(turtle, x, y, length, width, color, pen_thickness):
@@ -183,6 +238,27 @@ def rectangle(turtle, x, y, length, width, color, pen_thickness):
     # y1 = turtle.ycor()
     # print('{},{}'.format(x1,y1))
 
+def RectangleSpawn(turtle,x,y, length, width, color, pen_thickness):
+    global ShapeSpawnClick
+    global SpawnRectangle
+    global SpawnSquare
+    global SpawnCircle
+    global SpawnTriangle
+
+    turtle.setheading(0)
+    turtle.color(color)
+    turtle.pensize(pen_thickness)
+    turtle.penup()
+    turtle.goto(x,y)
+    turtle.pendown()
+    for i in range(2):
+        turtle.forward(length)
+        turtle.right(90)
+        turtle.forward(width)
+        turtle.right(90)
+    turtle.penup()
+    writeT.undo()
+    ShapeSpawnClick = False
 #circle function
 def circle(turtle,x,y, radius, color, pen_thickness):
     turtle.penup()
@@ -234,6 +310,9 @@ def init():
     rectangle(turtles[1], -320, -205, 100, 50, 'black', 1)
     turtles[1].goto(-270, -238.34)
     turtles[1].write('Clear', align = "center",font = ('Arial', 10, 'normal'))
+    rectangle(turtles[1], -210, -205, 100, 50, 'black', 1)
+    turtles[1].goto(-160, -238.34)
+    turtles[1].write('Undo', align = "center",font = ('Arial', 10, 'normal'))
 
     InitDone = True
     if (InitDone == True):
@@ -286,6 +365,36 @@ class Slider(Turtle):
                 i += 1
             
             print(x)
+
+
+
+def mouseClicked(x,y):
+    if (ShapeSpawnClick == True):
+        if (SpawnSquare == True):
+            print('square')
+            print('{},{}'.format(x,y))
+            SquareSpawn(brush,x,y,100)
+        elif (SpawnCircle == True):
+            CircleSpawn(x,y)
+        elif (SpawnRectangle == True):
+            RectangleSpawn(x,y)
+        elif (SpawnTriangle == True):
+            TriangleSpawn(x,y)
+    else:
+        MousePos(x,y)
+
+#on click return cordinates
+wn.onclick(mouseClicked)
+
+#when right click is pressed TpTurtle is called
+wn.onclick(TpTurtle, 3)
+
+#changes color when right or left arrow pressed
+wn.onkey(ColorSwitchRight, 'Right')
+wn.onkey(ColorSwitchLeft, 'Left')
+
+#lets turtle to draw when dragged
+brush.ondrag(Draw)
            
         
 
