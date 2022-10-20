@@ -38,6 +38,18 @@ RectangleLength = 100
 RectangleWidth = 100
 CircleSize = 100
 TriangleSize = 100
+Rectangle = RectangleLength
+
+#do this
+#if(LengthActive == True):
+    #Rectangle Length = etc
+    #clear RectangleT
+    #wriite "Rectangle Length = etc etc"
+#elif(WidthActive == True):
+    #Rectangle Width = etc
+    #clear RectangleT
+    #write "Rectangle Width = etc etc"
+#do this
 
 #sets our base turtle color
 color = 1
@@ -162,25 +174,25 @@ def MousePos(x,y):
         SquareSize -= 1
         print(SquareSize)
         turtles[1].clear()
-        turtles[1].write("-1 square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
+        turtles[1].write("Square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
     #check if square size +1 button is clicked
     elif (x > 125 and x < 195 and y < -260 and y > -310):
         SquareSize += 1
         print(SquareSize)
         turtles[1].clear()
-        turtles[1].write("+1 square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
+        turtles[1].write("Square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
     #check if square size -10 button is clicked
     elif (x > 45 and x < 115 and y < -315 and y > -365):
         SquareSize -= 10
         print(SquareSize)
         turtles[1].clear()
-        turtles[1].write("-10 Square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
+        turtles[1].write("Square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
     #check if square size +10 button is clicked
     elif (x > 125 and x < 195 and y < -315 and y > -365):
         SquareSize += 10
         print(SquareSize)
         turtles[1].clear()
-        turtles[1].write("+10 Square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
+        turtles[1].write("Square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
     
     #check triangle sizer
     
@@ -211,6 +223,32 @@ def MousePos(x,y):
 
     #check circle sizer
     #check if circle size -1 button is clicked
+    elif (x > 205 and x < 275 and y < -260 and y > -310):
+        CircleSize -= 1
+        print(CircleSize)
+        turtles[2].clear()
+        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if circle size +1 button is clicked
+    elif (x > 285 and x < 355 and y < -260 and y > -310):
+        CircleSize += 1
+        print(CircleSize)
+        turtles[2].clear()
+        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if circle size -10 button is clicked
+    elif (x > 205 and x < 275 and y < -315 and y > -365):
+        CircleSize -= 10
+        print(CircleSize)
+        turtles[2].clear()
+        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if circle size +10 button is clicked
+    elif (x > 285 and x < 355 and y < -225 and y > -365):
+        CircleSize += 10
+        print(CircleSize)
+        turtles[2].clear()
+        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
+
+    #check rectangle sizer
+    #check if rectangle size -1 button is clicked
     elif (x > 205 and x < 275 and y < -260 and y > -310):
         CircleSize -= 1
         print(CircleSize)
