@@ -1,4 +1,5 @@
 from asyncore import write
+import string
 from turtle import *
 import turtle as t
 from turtle import Turtle, Screen, goto
@@ -8,20 +9,30 @@ wn = t.Screen()
 brush = t.Turtle()
 writeT = Turtle()
 writeT.penup()
-writeT.goto(-80, -250)
-turtles = ['brush','Init_T']
+writeT.goto(50, -240)
+turtles = ['brush','Init_T','SquareT','RectangleT','CircleT','TriangleT']
+turtles[2] = Turtle()
+turtles[3] = Turtle()
+turtles[4] = Turtle()
+turtles[5] = Turtle()
+
 brush.shape('circle')
 # brush.shapesize(150,150)
 # r, g, b, a = 100, 100, 100, 0
 # brush.fillcolor(r,g,b,a)
 
 pensize = 1
+shapesize = 100
 
 ShapeSpawnClick = False
 SpawnSquare = False
 SpawnTriangle = False
 SpawnRectangle = False
 SpawnCircle = False
+SquareSpawnActive = False
+CircleSpawnActive = False
+TriangleSpawnActive = False
+RectangleSpawnActive = False
 
 #sets our base turtle color
 color = 1
@@ -55,42 +66,57 @@ def TpTurtle(x,y):
 def MousePos(x,y):
     print('{},{}'.format(x,y))
     #check if square button is clicked
+    global SquareSpawnActive
+    global RectangleSpawnActive
+    global CircleSpawnActive
+    global TriangleSpawnActive
+    global ShapeSpawnClick
+    global SpawnSquare
+    global SpawnCircle
+    global SpawnRectangle
+    global SpawnTriangle
+    global shapesize
     if (x > -760 and x < -660 and y < -205 and y > -255):
-        global ShapeSpawnClick
-        global SpawnSquare
-        global SpawnCircle
-        global SpawnRectangle
-        global SpawnTriangle
 
-        #save turtle x and y position as variables
-        x1 = brush.xcor()
-        y1 = brush.ycor()
+ 
+        if (SquareSpawnActive == False):
 
-        ShapeSpawnClick = True
-        SpawnSquare = True
-        SpawnCircle = False
-        SpawnTriangle = False
-        SpawnRectangle = False
+            SquareSpawnActive = True
+            print('square spawn active')
 
-        writeT.goto(50,-240)
-        writeT.write('Click on the canvas to draw square', align = "center",font = ('Arial', 10, 'normal'))
-        # if (y1 >= -100):
-        #     square(x = x1, y = y1, size = 100, color = colorname, pen_thickness = pensize, turtle = brush)
-        # else: 
-        #     brush.write('too close to the border to produce square', align = "center",font = ('Arial', 10, 'normal'))
-        #     #pause for 2 seconds then delete text
-        #     wn.ontimer(brush.undo(), t = 2000)
+            ShapeSpawnClick = True
+            SpawnSquare = True
+            SpawnCircle = False
+            SpawnTriangle = False
+            SpawnRectangle = False
+
+            writeT.goto(50,-240)
+            writeT.write('Click on the canvas to draw square', align = "center",font = ('Arial', 10, 'normal'))
+            print('prompted user to click on canvas')
+
     #check if rectangle button is clicked
     elif (x > -540 and x < -440 and y < -205 and y > -255):
-        #save turtle x and y position as variables
-        x1 = brush.xcor()
-        y1 = brush.ycor()
-        if (y1 >= -100):
-            rectangle(x = x1, y = y1, length = 100, width = 50, color = 'black', pen_thickness = pensize, turtle = brush)
-        else: 
-            brush.write('too close to the border to produce rectangle', align = "center",font = ('Arial', 10, 'normal'))
-            #pause for 2 seconds then delete text
-            wn.ontimer(undoB(1), t = 2000)
+
+        if (RectangleSpawnActive == False):
+                RectangleSpawnActive = True
+                print('rectangle spawn active')
+    
+                ShapeSpawnClick = True
+                SpawnSquare = False
+                SpawnCircle = False
+                SpawnTriangle = False
+                SpawnRectangle = True
+    
+                writeT.goto(50,-240)
+                writeT.write('Click on the canvas to draw rectangle', align = "center",font = ('Arial', 10, 'normal'))
+                print('prompted user to click on canvas')
+
+        # if (y1 >= -100):
+        #     rectangle(x = x1, y = y1, length = 100, width = 50, color = 'black', pen_thickness = pensize, turtle = brush)
+        # else: 
+        #     brush.write('too close to the border to produce rectangle', align = "center",font = ('Arial', 10, 'normal'))
+        #     #pause for 2 seconds then delete text
+        #     wn.ontimer(undoB(1), t = 1000)
     #check if circle button is clicked
     elif (x > -650 and x < -550 and y < -205 and y > -255):
         #save turtle x and y position as variables
@@ -118,11 +144,31 @@ def MousePos(x,y):
         brush.clear()
     #check if undo button is clicked
     elif (x > -210 and x < -110 and y < -205 and y > -255):
-        i = 0
         undoB(5)
-
-
-
+    #check if shape size -1 button is clicked
+    elif (x > 45 and x < 145 and y < -260 and y > -310):
+        shapesize -= 1
+        print(shapesize)
+        turtles[2].clear()
+        turtles[2].write("Shape Size " + str(shapesize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if shape size +1 button is clicked
+    elif (x > 125 and x < 225 and y < -260 and y > -310):
+        shapesize += 1
+        print(shapesize)
+        turtles[2].clear()
+        turtles[2].write("Shape Size " + str(shapesize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if pen size -10 button is clicked
+    elif (x > 45 and x < 145 and y < -315 and y > -365):
+        shapesize -= 10
+        print(shapesize)
+        turtles[2].clear()
+        turtles[2].write("Shape Size " + str(shapesize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if pen size +10 button is clicked
+    elif (x > 125 and y < 225 and y > -365):
+        shapesize += 10
+        print(shapesize)
+        turtles[2].clear()
+        turtles[2].write("Shape Size " + str(shapesize), align = "center",font = ('Arial', 10, 'normal'))
 #freedraw function
 def Draw(x, y):
     if (y > -200):
@@ -158,6 +204,7 @@ def ColorSwitchRight():
         colorname = 'black'
         print('black')
         color = 1
+
 #allows color to change backwards
 def ColorSwitchLeft():
     global color
@@ -183,26 +230,18 @@ def ColorSwitchLeft():
         print('green')
         color = 3
 
-# #square function
-# def square(turtle,x,y, size, color, pen_thickness):
-#     global clicked
-#     turtle.penup()
-#     writeT.goto(50,-240)
-#     writeT.write('Click on the canvas to draw square', align = "center",font = ('Arial', 10, 'normal'))
-
-#     clicked = False
-#     while clicked == False:
-#         wn.onclick(SquareSpawn)
-#     MousePos(x,y)
-#     # while (clicked != True):
-#     #   
-#     # turtle.goto(x + (size/2), y - (size/1.5))
-
+#square function
 def SquareSpawn(turtle,x,y, size):
+    
     global ShapeSpawnClick
+    global SquareSpawnActive
+
     turtle.setheading(0)
     turtle.pensize(pensize)
     minY = -200 + size
+    print(minY)
+
+
     if (y > minY):
         turtle.penup()
         turtle.goto(x,y)
@@ -213,13 +252,51 @@ def SquareSpawn(turtle,x,y, size):
         turtle.penup()
         undoW(1)
         ShapeSpawnClick = False
-    else:
-        writeT.goto(x,y+20)
-        writeT.write('too close to the border to produce square', align = "center",font = ('Arial', 10, 'normal'))
-        #pause for 2 seconds then delete text
-        wn.ontimer(undoW(2), t = 1000)
+        SquareSpawnActive = False
+    elif (y < minY ):
+        if (y > -200):
+            writeT.goto(x,y+20)
+            writeT.write('too close to the border to produce square', align = "center",font = ('Arial', 10, 'normal'))
+            #pause for 2 seconds then delete text
+            wn.ontimer(writeT.undo(), t = 1000)
+            writeT.undo()
 
 #rectangle function
+def RectangleSpawn(turtle,x,y, length, width):
+    
+    global RectangleSpawnActive
+    global ShapeSpawnClick
+    global SpawnRectangle
+    global SpawnSquare
+    global SpawnCircle
+    global SpawnTriangle
+
+    turtle.setheading(0)
+    turtle.pensize(pensize)
+    minY = -200 + width
+
+    if (y > minY):
+        turtle.penup()
+        turtle.goto(x,y)
+        turtle.pendown()
+        for i in range(2):
+            turtle.forward(length)
+            turtle.right(90)
+            turtle.forward(width)
+            turtle.right(90)
+        turtle.penup()
+        undoW(1)
+        ShapeSpawnClick = False
+        RectangleSpawnActive = False
+    else:
+        writeT.goto(x,y+20)
+        writeT.write('too close to the border to produce rectangle', align = "center",font = ('Arial', 10, 'normal'))
+        #pause for 2 seconds then delete text
+        wn.ontimer(writeT.undo(), t = 1000)
+        writeT.undo()
+
+
+#rectangle init function
 def rectangle(turtle, x, y, length, width, color, pen_thickness):
     turtle.penup()
     turtle.goto(x,y)
@@ -238,27 +315,6 @@ def rectangle(turtle, x, y, length, width, color, pen_thickness):
     # y1 = turtle.ycor()
     # print('{},{}'.format(x1,y1))
 
-def RectangleSpawn(turtle,x,y, length, width, color, pen_thickness):
-    global ShapeSpawnClick
-    global SpawnRectangle
-    global SpawnSquare
-    global SpawnCircle
-    global SpawnTriangle
-
-    turtle.setheading(0)
-    turtle.color(color)
-    turtle.pensize(pen_thickness)
-    turtle.penup()
-    turtle.goto(x,y)
-    turtle.pendown()
-    for i in range(2):
-        turtle.forward(length)
-        turtle.right(90)
-        turtle.forward(width)
-        turtle.right(90)
-    turtle.penup()
-    writeT.undo()
-    ShapeSpawnClick = False
 #circle function
 def circle(turtle,x,y, radius, color, pen_thickness):
     turtle.penup()
@@ -313,7 +369,32 @@ def init():
     rectangle(turtles[1], -210, -205, 100, 50, 'black', 1)
     turtles[1].goto(-160, -238.34)
     turtles[1].write('Undo', align = "center",font = ('Arial', 10, 'normal'))
+    rectangle(turtles[1], 45, -205, 150, 50, 'black', 1)
 
+    #initalize shape size
+    turtles[3].penup()
+    turtles[3].goto(120, -238.34)
+    turtles[2].hideturtle()
+    turtles[3].hideturtle()
+    turtles[4].hideturtle()
+    turtles[5].hideturtle()
+    turtles[3].write('Shape Size ' + str(shapesize), align = "center",font = ('Arial', 10, 'normal'))
+    rectangle(turtles[1], 45, -260, 70, 50, 'black', 1)
+    turtles[1].goto(80, -293.34)
+    turtles[1].write('-1', align = "center",font = ('Arial', 10, 'normal'))
+    rectangle(turtles[1], 125, -260, 70, 50, 'black', 1)
+    turtles[1].goto(160, -293.34)
+    turtles[1].write('+1', align = "center",font = ('Arial', 10, 'normal'))
+    rectangle(turtles[1], 45, -315, 70, 50, 'black', 1)
+    turtles[1].goto(80, -348.34)
+    turtles[1].write('-10', align = "center",font = ('Arial', 10, 'normal'))
+    rectangle(turtles[1], 125, -315, 70, 50, 'black', 1)
+    turtles[1].goto(160, -348.34)
+    turtles[1].write('+10', align = "center",font = ('Arial', 10, 'normal'))
+    rectangle(turtles[1], 45, -370, 150, 50, 'black', 1)
+    turtles[1].goto(120, -403.34)
+    turtles[1].write('Square', align = "center",font = ('Arial', 10, 'normal'))
+    
     InitDone = True
     if (InitDone == True):
         turtles[1].hideturtle()
@@ -332,33 +413,36 @@ class Slider(Turtle):
         self.pensize(5)
         self.shapesize(1,1,1)
         self.penup()
-        self.goto(112.5,y)
+        self.goto(-50,y)
         self.pencolor('blue')
         self.pendown()
-        self.goto(-137.5,y)
+        self.goto(-300,y)
         self.penup()
         for i in range(0, 11):
-            self.goto(-137.5 + (i * 25), y)
+            self.goto(-300 + (i * 25), y)
             self.pendown()
-            self.goto(-137.5 + (i * 25), y + 10)
+            self.goto(-300 + (i * 25), y + 10)
             self.penup()
         self.pencolor('black')
-        self.goto(-137.5,-300)
+        self.goto(-300,-300)
 
         self.onrelease(self.drag)
     def drag(self, x, y):
-        if(x<=125 and x>=-137.5):
-            x1 = -125
+        if(x<=-37.5 and x>=-300):
+            x1 = -287.5
             i = 1
             global pensize
-            if (x < -112.5):
-                self.goto(-137.5,-300)
+            if (x < -275):
+                self.goto(-300,-300)
                 pensize = 1
             while i < 11:
                 if (x >= x1 and x < x1+25):
                     self.setx(x1+12.5)
                     print(i)
                     pensize = (i * 5)
+                    #write pensize on the screen
+
+
                     break
                 else:
                     x1 += 25
@@ -366,17 +450,17 @@ class Slider(Turtle):
             
             print(x)
 
-#placeholder to push again
-
 def mouseClicked(x,y):
     if (ShapeSpawnClick == True):
         if (SpawnSquare == True):
             print('square')
             print('{},{}'.format(x,y))
-            SquareSpawn(brush,x,y,100)
+            SquareSpawn(brush,x,y,shapesize)
         elif (SpawnCircle == True):
             CircleSpawn(x,y)
         elif (SpawnRectangle == True):
+            print('Rectangle')
+            print('{},{}'.format(x,y))
             RectangleSpawn(x,y)
         elif (SpawnTriangle == True):
             TriangleSpawn(x,y)
