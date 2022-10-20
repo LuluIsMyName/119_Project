@@ -366,7 +366,7 @@ class Slider(Turtle):
             
             print(x)
 
-
+#placeholder to push again
 
 def mouseClicked(x,y):
     if (ShapeSpawnClick == True):
