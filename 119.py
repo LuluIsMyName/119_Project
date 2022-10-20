@@ -33,6 +33,11 @@ SquareSpawnActive = False
 CircleSpawnActive = False
 TriangleSpawnActive = False
 RectangleSpawnActive = False
+SquareSize = 100
+RectangleLength = 100
+RectangleWidth = 100
+CircleSize = 100
+TriangleSize = 100
 
 #sets our base turtle color
 color = 1
@@ -75,7 +80,11 @@ def MousePos(x,y):
     global SpawnCircle
     global SpawnRectangle
     global SpawnTriangle
-    global shapesize
+    global SquareSize
+    global CircleSize
+    global RectangleLength
+    global RectangleWidth
+    global TriangleSize
     if (x > -760 and x < -660 and y < -205 and y > -255):
 
  
@@ -145,30 +154,87 @@ def MousePos(x,y):
     #check if undo button is clicked
     elif (x > -210 and x < -110 and y < -205 and y > -255):
         undoB(5)
-    #check if shape size -1 button is clicked
-    elif (x > 45 and x < 145 and y < -260 and y > -310):
-        shapesize -= 1
-        print(shapesize)
+
+    #check square sizer
+
+    #check if square size -1 button is clicked
+    elif (x > 45 and x < 115 and y < -260 and y > -310):
+        SquareSize -= 1
+        print(SquareSize)
+        turtles[1].clear()
+        turtles[1].write("-1 square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if square size +1 button is clicked
+    elif (x > 125 and x < 195 and y < -260 and y > -310):
+        SquareSize += 1
+        print(SquareSize)
+        turtles[1].clear()
+        turtles[1].write("+1 square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if square size -10 button is clicked
+    elif (x > 45 and x < 115 and y < -315 and y > -365):
+        SquareSize -= 10
+        print(SquareSize)
+        turtles[1].clear()
+        turtles[1].write("-10 Square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if square size +10 button is clicked
+    elif (x > 125 and x < 195 and y < -315 and y > -365):
+        SquareSize += 10
+        print(SquareSize)
+        turtles[1].clear()
+        turtles[1].write("+10 Square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
+    
+    #check triangle sizer
+    
+    #check if TriangleSize -1 button is clicked
+    elif (x > 510 and x < 580 and y < -260 and y > -310):
+        TriangleSize -= 1
+        print(TriangleSize)
+        turtles[4].clear()
+        turtles[4].write("Triangle Size " + str(TriangleSize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if TriangleSize +1 button is clicked
+    elif (x > 590 and x < 660 and y < -260 and y > -310):
+        TriangleSize += 1
+        print(TriangleSize)
+        turtles[4].clear()
+        turtles[4].write("Triangle Size " + str(TriangleSize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if triangle size -10 button is clicked
+    elif (x > 510 and x < 580 and y < -315 and y > -365):
+        TriangleSize -= 10
+        print(TriangleSize)
+        turtles[4].clear()
+        turtles[4].write("Triangle Size " + str(TriangleSize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if triangle size +10 button is clicked
+    elif (x > 590 and x < 660 and y < 225 and y > -365):
+        TriangleSize += 10
+        print(TriangleSize)
+        turtles[4].clear()
+        turtles[4].write("Triangle Size " + str(TriangleSize), align = "center",font = ('Arial', 10, 'normal'))
+
+    #check circle sizer
+    #check if circle size -1 button is clicked
+    elif (x > 205 and x < 275 and y < -260 and y > -310):
+        CircleSize -= 1
+        print(CircleSize)
         turtles[2].clear()
-        turtles[2].write("Shape Size " + str(shapesize), align = "center",font = ('Arial', 10, 'normal'))
-    #check if shape size +1 button is clicked
-    elif (x > 125 and x < 225 and y < -260 and y > -310):
-        shapesize += 1
-        print(shapesize)
+        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if circle size +1 button is clicked
+    elif (x > 285 and x < 355 and y < -260 and y > -310):
+        CircleSize += 1
+        print(CircleSize)
         turtles[2].clear()
-        turtles[2].write("Shape Size " + str(shapesize), align = "center",font = ('Arial', 10, 'normal'))
-    #check if pen size -10 button is clicked
-    elif (x > 45 and x < 145 and y < -315 and y > -365):
-        shapesize -= 10
-        print(shapesize)
+        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if circle size -10 button is clicked
+    elif (x > 205 and x < 275 and y < -315 and y > -365):
+        CircleSize -= 10
+        print(CircleSize)
         turtles[2].clear()
-        turtles[2].write("Shape Size " + str(shapesize), align = "center",font = ('Arial', 10, 'normal'))
-    #check if pen size +10 button is clicked
-    elif (x > 125 and y < 225 and y > -365):
-        shapesize += 10
-        print(shapesize)
+        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
+    #check if circle size +10 button is clicked
+    elif (x > 285 and x < 355 and y < -225 and y > -365):
+        CircleSize += 10
+        print(CircleSize)
         turtles[2].clear()
-        turtles[2].write("Shape Size " + str(shapesize), align = "center",font = ('Arial', 10, 'normal'))
+        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
+    
 #freedraw function
 def Draw(x, y):
     if (y > -200):
@@ -369,31 +435,32 @@ def init():
     rectangle(turtles[1], -210, -205, 100, 50, 'black', 1)
     turtles[1].goto(-160, -238.34)
     turtles[1].write('Undo', align = "center",font = ('Arial', 10, 'normal'))
-    rectangle(turtles[1], 45, -205, 150, 50, 'black', 1)
+    
 
-    #initalize shape size
-    turtles[3].penup()
-    turtles[3].goto(120, -238.34)
-    turtles[2].hideturtle()
-    turtles[3].hideturtle()
-    turtles[4].hideturtle()
-    turtles[5].hideturtle()
-    turtles[3].write('Shape Size ' + str(shapesize), align = "center",font = ('Arial', 10, 'normal'))
-    rectangle(turtles[1], 45, -260, 70, 50, 'black', 1)
-    turtles[1].goto(80, -293.34)
-    turtles[1].write('-1', align = "center",font = ('Arial', 10, 'normal'))
-    rectangle(turtles[1], 125, -260, 70, 50, 'black', 1)
-    turtles[1].goto(160, -293.34)
-    turtles[1].write('+1', align = "center",font = ('Arial', 10, 'normal'))
-    rectangle(turtles[1], 45, -315, 70, 50, 'black', 1)
-    turtles[1].goto(80, -348.34)
-    turtles[1].write('-10', align = "center",font = ('Arial', 10, 'normal'))
-    rectangle(turtles[1], 125, -315, 70, 50, 'black', 1)
-    turtles[1].goto(160, -348.34)
-    turtles[1].write('+10', align = "center",font = ('Arial', 10, 'normal'))
-    rectangle(turtles[1], 45, -370, 150, 50, 'black', 1)
-    turtles[1].goto(120, -403.34)
-    turtles[1].write('Square', align = "center",font = ('Arial', 10, 'normal'))
+    #initalize shape size for each turtle
+    for i in range(2, 6):
+        shapetype = (i - 2) * 155
+        turtles[i].hideturtle()
+        turtles[i].penup()
+        turtles[i].goto(120 + shapetype, -238.34)
+        shape = ['Square', 'Circle', 'Rectangle', 'Triangle']
+        rectangle(turtles[1], 45 + shapetype, -205, 150, 50, 'black', 1)
+        turtles[i].write(shape[i-2] + ' Size ' + str(shapesize), align = "center",font = ('Arial', 10, 'normal'))
+        rectangle(turtles[1], 45 + shapetype, -260, 70, 50, 'black', 1)
+        turtles[1].goto(80 + shapetype, -293.34)
+        turtles[1].write('-1', align = "center",font = ('Arial', 10, 'normal'))
+        rectangle(turtles[1], 125 + shapetype, -260, 70, 50, 'black', 1)
+        turtles[1].goto(160 + shapetype, -293.34)
+        turtles[1].write('+1', align = "center",font = ('Arial', 10, 'normal'))
+        rectangle(turtles[1], 45 + shapetype, -315, 70, 50, 'black', 1)
+        turtles[1].goto(80 + shapetype, -348.34)
+        turtles[1].write('-10', align = "center",font = ('Arial', 10, 'normal'))
+        rectangle(turtles[1], 125 + shapetype, -315, 70, 50, 'black', 1)
+        turtles[1].goto(160 + shapetype, -348.34)
+        turtles[1].write('+10', align = "center",font = ('Arial', 10, 'normal'))
+        # rectangle(turtles[1], 45 + shapetype, -370, 150, 50, 'black', 1)
+        # turtles[1].goto(120 + shapetype, -403.34)
+        # turtles[1].write('Square', align = "center",font = ('Arial', 10, 'normal'))
     
     InitDone = True
     if (InitDone == True):
