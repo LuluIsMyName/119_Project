@@ -4,26 +4,32 @@ from turtle import *
 import turtle as t
 from turtle import Turtle, Screen, goto
 
+#1.1.9 made by Erica Lu, Luis Sanchez
+
 wn = t.Screen()
 
-brush = t.Turtle()
+turtle_image = "blankturtle.gif"
+wn.addshape(turtle_image)
+
+#Luis
+brush = t.Turtle(shape=turtle_image)
 writeT = Turtle()
 writeT.penup()
-writeT.goto(50, -240)
+writeT.goto(-20, -85)
 turtles = ['brush','Init_T','SquareT','CircleT', 'RectangleT','TriangleT']
 turtles[2] = Turtle()
 turtles[3] = Turtle()
 turtles[4] = Turtle()
 turtles[5] = Turtle()
 
-brush.shape('circle')
-# brush.shapesize(150,150)
-# r, g, b, a = 100, 100, 100, 0
-# brush.fillcolor(r,g,b,a)
+colorname = ['yellow', 'gold', 'orange', 'red', 'maroon', 'violet', 'magenta', 'purple', 'navy', 'blue', 'skyblue', 'cyan', 'turquoise', 'lightgreen', 'green', 'darkgreen', 'chocolate', 'brown', 'black', 'gray']
+
+# brush.shape('square')
 
 pensize = 1
 shapesize = 100
 
+#Erica & Luis
 InitDone = False
 ShapeSpawnClick = False
 SpawnSquare = False
@@ -43,46 +49,42 @@ Rectangle = [RectangleLength, RectangleWidth]
 RectListIndex = 0
 RectangleSizeMod = 'Rectangle Length'
 
-#do this
-#if(LengthActive == True):
-    #Rectangle Length = etcS
-    #clear RectangleT
-    #wriite "Rectangle Length = etc etc"
-#elif(WidthActive == True):
-    #Rectangle Width = etc
-    #clear RectangleT
-    #write "Rectangle Width = etc etc"
-#do this
-
+#Luis
 #sets our base turtle color
-color = 1
+color = 0
 colorname = 'black'
 
-
+#Luis
 #enables window to listen for input
 wn.listen()
 
+#Luis
 #sets turtles speed to fastest
 brush.speed('fastest')
 writeT.speed('fastest')
 
+#Luis
 def undoB(e):
     i = 0
     while i < e:
         brush.undo()
         i += 1
 
+#Luis
 def undoW(e):
     i = 0
     while i < e:
         writeT.undo()
         i += 1
 
-def TpTurtle(x,y):
-    if (y > -200):
-        brush.penup()
-        brush.goto(x,y)
+#Luis
+# def TpTurtle(x,y):
+#     if (y > -200):
+#         brush.penup()
+#         brush.goto(x,y)
 
+
+#Erica & Luis
 def MousePos(x,y):
     print('{},{}'.format(x,y))
     #check if square button is clicked
@@ -117,7 +119,7 @@ def MousePos(x,y):
             SpawnTriangle = False
             SpawnRectangle = False
 
-            writeT.goto(50,-240)
+            writeT.goto(-20,-85)
             writeT.write('Click on the canvas to draw square', align = "center",font = ('Arial', 10, 'normal'))
             print('prompted user to click on canvas')
 
@@ -134,7 +136,7 @@ def MousePos(x,y):
                 SpawnTriangle = False
                 SpawnRectangle = True
     
-                writeT.goto(50,-240)
+                writeT.goto(-20,-85)
                 writeT.write('Click on the canvas to draw rectangle', align = "center",font = ('Arial', 10, 'normal'))
                 print('prompted user to click on canvas')
 
@@ -151,7 +153,7 @@ def MousePos(x,y):
                 SpawnTriangle = False
                 SpawnRectangle = False
     
-                writeT.goto(50,-240)
+                writeT.goto(-20,-85)
                 writeT.write('Click on the canvas to draw circle', align = "center",font = ('Arial', 10, 'normal'))
                 print('prompted user to click on canvas')
 
@@ -168,7 +170,7 @@ def MousePos(x,y):
             SpawnTriangle = True
             SpawnRectangle = False
 
-            writeT.goto(50,-240)
+            writeT.goto(-20,-85)
             writeT.write('Click on the canvas to draw triangle', align = "center",font = ('Arial', 10, 'normal'))
             print('prompted user to click on canvas')
 
@@ -185,7 +187,7 @@ def MousePos(x,y):
     elif (x > 45 and x < 115 and y < 330 and y > 280):
         SquareSize -= 1
         if (SquareSize < 0):
-            SquareSize = 0
+            SquareSize = 1
         print(SquareSize)
         turtles[1].clear()
         turtles[1].write("Square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
@@ -199,7 +201,7 @@ def MousePos(x,y):
     elif (x > 45 and x < 115 and y < 275 and y > 225):
         SquareSize -= 10
         if SquareSize < 0:
-            SquareSize = 0
+            SquareSize = 1
         print(SquareSize)
         turtles[1].clear()
         turtles[1].write("Square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
@@ -217,7 +219,7 @@ def MousePos(x,y):
     elif (x > 205 and x < 275 and y < 330 and y > 280):
         CircleSize -= 1
         if (CircleSize < 0):
-            CircleSize = 0
+            CircleSize = 1
         print('Circle Size' + str(CircleSize))
         turtles[2].clear()
         turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
@@ -231,7 +233,7 @@ def MousePos(x,y):
     elif (x > 205 and x < 275 and y < 275 and y > 225):
         CircleSize -= 10
         if(CircleSize < 0):
-            CircleSize = 0
+            CircleSize = 1
         print('Circle Size' + str(CircleSize))
         turtles[2].clear()
         turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
@@ -264,7 +266,7 @@ def MousePos(x,y):
     elif (x > 365 and x < 435 and y < 330 and y > 280):
         Rectangle[RectListIndex] -= 1
         if (Rectangle[RectListIndex] < 0):
-            Rectangle[RectListIndex] = 0
+            Rectangle[RectListIndex] = 1
         print('width ' + str(Rectangle[1]))
         print('length' + str(Rectangle[0]))
         turtles[3].clear()
@@ -280,7 +282,7 @@ def MousePos(x,y):
     elif (x > 365 and x < 435 and y < 275 and y > 225):
         Rectangle[RectListIndex] -= 10
         if (Rectangle[RectListIndex] < 0):
-            Rectangle[RectListIndex] = 0
+            Rectangle[RectListIndex] = 1
         print('width ' + str(Rectangle[1]))
         print('length' + str(Rectangle[0]))
         turtles[3].clear()
@@ -299,7 +301,7 @@ def MousePos(x,y):
     elif (x > 510 and x < 580 and y < 330 and y > 280):
         TriangleSize -= 1
         if(TriangleSize < 0):
-            TriangleSize = 0
+            TriangleSize = 1
         print(TriangleSize)
         print('Triangle Size ' + str(TriangleSize))
         turtles[4].clear()
@@ -315,7 +317,7 @@ def MousePos(x,y):
     elif (x > 510 and x < 580 and y < 275 and y > 225):
         TriangleSize -= 10
         if(TriangleSize < 0):
-            TriangleSize = 0
+            TriangleSize = 1
         print('Triangle Size ' + str(TriangleSize))
         turtles[4].clear()
         turtles[4].write("Triangle Size " + str(TriangleSize), align = "center",font = ('Arial', 10, 'normal'))
@@ -327,68 +329,190 @@ def MousePos(x,y):
         turtles[4].write("Triangle Size " + str(TriangleSize), align = "center",font = ('Arial', 10, 'normal'))
         
 
-        
+#Luis
 #freedraw function
 def Draw(x, y):
-    if (y < 1690):
-        brush.ondrag(None)
-        brush.pensize(pensize)
-        brush.pendown()
-        brush.setheading(brush.towards(x,y))
-        brush.goto(x,y)
-        brush.ondrag(Draw)
-        print(pensize)
+    if (InitDone == True):
+        if (y < 160):
+            brush.ondrag(None)
+            brush.goto(x, y)
+            brush.pendown()
+            brush.pensize(pensize)
+            brush.setheading(brush.towards(x,y))
+            brush.ondrag(Draw)
+            print(pensize)
 
 #allows color to change forwards
 def ColorSwitchRight():
     global color
     global colorname
-    if color == 1:
-        brush.color('blue')
-        colorname = 'blue'
-        print('blue')
+    if color == 0:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 1
+    elif color == 1:
+        brush.color(colorname[color])
+        print(colorname[color])
         color = 2
     elif color == 2:
-        brush.color('green')
-        colorname = 'green'
-        print('green')
+        brush.color(colorname[color])
+        print(colorname[color])
         color = 3
     elif color == 3:
-        brush.color('red')
-        colorname = 'red'
-        print('red')
+        brush.color(colorname[color])
+        print(colorname[color])
         color = 4
     elif color == 4:
-        brush.color('black')
-        colorname = 'black'
-        print('black')
-        color = 1
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 5
+    elif color == 5:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 6
+    elif color == 6:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 7
+    elif color == 7:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 8
+    elif color == 8:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 9
+    elif color == 9:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 10
+    elif color == 10:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 11
+    elif color == 11:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 12
+    elif color == 12:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 13
+    elif color == 13:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 14
+    elif color == 14:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 15
+    elif color == 15:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 16
+    elif color == 16:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 17
+    elif color == 17:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 18
+    elif color == 18:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 19
+    elif color == 19:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 0
 
+#Luis
 #allows color to change backwards
 def ColorSwitchLeft():
     global color
     global colorname
-    if color == 1:
-        brush.color('red')
-        colorname = 'red'
-        print('red')
-        color = 4
+    if color == 0:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 19
+    elif color == 1:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 0
     elif color == 2:
-        brush.color('black')
-        colorname = 'black'
-        print('black')
+        brush.color(colorname[color])
+        print(colorname[color])
         color = 1
     elif color == 3:
-        brush.color('blue')
-        colorname = 'blue'
-        print('blue')
+        brush.color(colorname[color])
+        print(colorname[color])
         color = 2
     elif color == 4:
-        brush.color('green')
-        colorname = 'green'
-        print('green')
+        brush.color(colorname[color])
+        print(colorname[color])
         color = 3
-
+    elif color == 5:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 4
+    elif color == 6:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 5
+    elif color == 7:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 6
+    elif color == 8:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 7
+    elif color == 9:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 8
+    elif color == 10:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 9
+    elif color == 11:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 10
+    elif color == 12:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 11
+    elif color == 13:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 12
+    elif color == 14:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 13
+    elif color == 15:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 14
+    elif color == 16:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 15
+    elif color == 17:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 16
+    elif color == 18:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 17
+    elif color == 19:
+        brush.color(colorname[color])
+        print(colorname[color])
+        color = 18
+#Erica & Luis
 #square function
 def SquareSpawn(turtle,x,y, size):
     
@@ -420,6 +544,7 @@ def SquareSpawn(turtle,x,y, size):
             wn.ontimer(writeT.undo(), t = 1000)
             writeT.undo()
 
+#Erica & Luis
 #rectangle function
 def RectangleSpawn(turtle,x,y, length, width):
     
@@ -455,6 +580,7 @@ def RectangleSpawn(turtle,x,y, length, width):
             wn.ontimer(writeT.undo(), t = 1000)
             writeT.undo()
 
+#Erica & Luis
 def CircleSpawn(turtle,x,y, radius):
 
     global CircleSpawnActive
@@ -484,7 +610,8 @@ def CircleSpawn(turtle,x,y, radius):
             #pause for 2 seconds then delete text
             wn.ontimer(writeT.undo(), t = 1000)
             writeT.undo()
-        
+
+#Erica & Luis     
 def TriangleSpawn(turtle,x,y, size):
     
         global TriangleSpawnActive
@@ -516,7 +643,7 @@ def TriangleSpawn(turtle,x,y, size):
             wn.ontimer(writeT.undo(), t = 1000)
             writeT.undo()
 
-
+#Erica & Luis
 #rectangle init function
 def rectangle(turtle, x, y, length, width, color, pen_thickness):
     turtle.penup()
@@ -531,42 +658,12 @@ def rectangle(turtle, x, y, length, width, color, pen_thickness):
         turtle.forward(width)
         turtle.right(90)
     turtle.penup()
-    # turtle.goto(x + (length/2), y - (width/1.5))
-    # x1 = turtle.xcor()
-    # y1 = turtle.ycor()
-    # print('{},{}'.format(x1,y1))
 
-#circle function
-def circle(turtle,x,y, radius, color, pen_thickness):
-    turtle.penup()
-    turtle.goto(x,y)
-    turtle.pendown()
-    turtle.color(color)
-    turtle.pensize(pen_thickness)
-    turtle.circle(radius)
-    turtle.penup()
-
-#triangle function
-def triangle(turtle, x, y, length, color, pen_thickness):
-    turtle.penup()
-    turtle.goto(x,y)
-    turtle.pendown()
-    turtle.color(color)
-    turtle.pensize(pen_thickness)
-    turtle.setheading(0)
-    turtle.forward(length)
-    turtle.right(120)
-    turtle.forward(length)
-    turtle.right(120)
-    turtle.forward(length)
-    turtle.penup()
-
+#Erica & Luis
 #initializes the program and sets up buttons
 def init():
     global InitDone
-
-    
-
+    #Luis
     turtles[1] = t.Turtle()
     turtles[1].penup()
     turtles[1].goto(-770, 160)
@@ -594,7 +691,7 @@ def init():
     turtles[1].goto(-160, 351.66)
     turtles[1].write('Undo', align = "center",font = ('Arial', 10, 'normal'))
     
-
+    #Erica
     #initalize shape size for each turtle
     for i in range(2, 6):
         shapetype = (i - 2) * 155
@@ -627,7 +724,7 @@ def init():
         turtles.remove(turtles[1])
     mySlider = Slider(-100, 290, 'black')
 
-
+#Erica
 #create a square turtle to use as a slider that the user can drag to change the size of the shape
 class Slider(Turtle):
     def __init__(self, x, y, color):
@@ -675,6 +772,7 @@ class Slider(Turtle):
             
             print(x)
 
+#Erica & Luis
 def mouseClicked(x,y):
     if (InitDone == True):
         if (ShapeSpawnClick == True):
@@ -698,20 +796,26 @@ def mouseClicked(x,y):
         else:
             MousePos(x,y)
 
+def PenUpBrush(x,y):
+    brush.penup()
+
+#Luis
 #on click return cordinates
 wn.onclick(mouseClicked)
 
+#Luis
 #when right click is pressed TpTurtle is called
-wn.onclick(TpTurtle, 3)
+# wn.onclick(TpTurtle, 3)
 
+#Luis
 #changes color when right or left arrow pressed
 wn.onkey(ColorSwitchRight, 'Right')
 wn.onkey(ColorSwitchLeft, 'Left')
 
+#Luis
 #lets turtle to draw when dragged
 brush.ondrag(Draw)
-           
-        
+brush.onrelease(PenUpBrush)
 
 #initializes the program and makes the buttons
 init()
