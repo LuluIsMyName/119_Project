@@ -671,7 +671,7 @@ def CircleSpawn(turtle,x,y, radius):
     global SpawnCircle
     global SpawnTriangle
 
-    turtle.setheading(0)
+    turtle.setheading(270)
     turtle.pensize(pensize)
     maxY = 160 - radius
 
