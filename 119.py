@@ -817,7 +817,7 @@ class Slider(Turtle):
         self.speed('fastest')
         self.shape('square')
         self.pensize(5)
-        self.shapesize(1,1,1)
+        self.shapesize(.75,.75,.75)
         self.penup()
         self.goto(-50,y)
         self.pencolor('blue')
