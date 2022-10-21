@@ -16,13 +16,16 @@ brush = t.Turtle(shape=turtle_image)
 writeT = Turtle()
 writeT.penup()
 writeT.goto(-20, -85)
+colorT = t.Turtle()
+colorT.hideturtle()
+colorT.penup()
 turtles = ['brush','Init_T','SquareT','CircleT', 'RectangleT','TriangleT']
 turtles[2] = Turtle()
 turtles[3] = Turtle()
 turtles[4] = Turtle()
 turtles[5] = Turtle()
 
-colorname = ['yellow', 'gold', 'orange', 'red', 'maroon', 'violet', 'magenta', 'purple', 'navy', 'blue', 'skyblue', 'cyan', 'turquoise', 'lightgreen', 'green', 'darkgreen', 'chocolate', 'brown', 'black', 'gray']
+colorname = ['black','yellow', 'gold', 'orange', 'red', 'maroon', 'violet', 'magenta', 'purple', 'navy', 'blue', 'skyblue', 'cyan', 'turquoise', 'lightgreen', 'green', 'darkgreen', 'chocolate', 'brown', 'gray']
 
 # brush.shape('square')
 
@@ -52,7 +55,7 @@ RectangleSizeMod = 'Rectangle Length'
 #Luis
 #sets our base turtle color
 color = 0
-colorname = 'black'
+# colorname = 'black'
 
 #Luis
 #enables window to listen for input
@@ -348,58 +351,86 @@ def ColorSwitchRight():
     global colorname
     if color == 0:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 1
     elif color == 1:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 2
     elif color == 2:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 3
     elif color == 3:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 4
     elif color == 4:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 5
     elif color == 5:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 6
     elif color == 6:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 7
     elif color == 7:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 8
     elif color == 8:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 9
     elif color == 9:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 10
     elif color == 10:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 11
     elif color == 11:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 12
     elif color == 12:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 13
     elif color == 13:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 14
     elif color == 14:
@@ -408,22 +439,32 @@ def ColorSwitchRight():
         color = 15
     elif color == 15:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 16
     elif color == 16:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 17
     elif color == 17:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 18
     elif color == 18:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 19
     elif color == 19:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 0
 
@@ -434,82 +475,122 @@ def ColorSwitchLeft():
     global colorname
     if color == 0:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 19
     elif color == 1:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 0
     elif color == 2:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 1
     elif color == 3:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 2
     elif color == 4:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 3
     elif color == 5:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 4
     elif color == 6:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 5
     elif color == 7:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 6
     elif color == 8:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 7
     elif color == 9:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 8
     elif color == 10:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 9
     elif color == 11:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 10
     elif color == 12:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 11
     elif color == 13:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 12
     elif color == 14:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 13
     elif color == 15:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 14
     elif color == 16:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 15
     elif color == 17:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 16
     elif color == 18:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 17
     elif color == 19:
         brush.color(colorname[color])
+        colorT.clear()
+        colorT.write("color: " + colorname[color], align = "center",font = ('Arial', 10, 'normal'))
         print(colorname[color])
         color = 18
 #Erica & Luis
@@ -690,7 +771,10 @@ def init():
     rectangle(turtles[1], -210, 385, 100, 50, 'black', 1)
     turtles[1].goto(-160, 351.66)
     turtles[1].write('Undo', align = "center",font = ('Arial', 10, 'normal'))
-    
+    rectangle(turtles[1], -100, 385, 100, 50, 'black', 1)
+    colorT.goto(-50, 351.66)
+    colorT.write('Color: ' + colorname[0], align = "center",font = ('Arial', 10, 'normal'))
+
     #Erica
     #initalize shape size for each turtle
     for i in range(2, 6):
