@@ -13,6 +13,7 @@ wn.addshape(turtle_image)
 
 #Luis
 brush = t.Turtle(shape=turtle_image)
+brush.penup()
 writeT = Turtle()
 writeT.penup()
 writeT.goto(-20, -85)
@@ -24,6 +25,7 @@ turtles[2] = Turtle()
 turtles[3] = Turtle()
 turtles[4] = Turtle()
 turtles[5] = Turtle()
+Drawing = False
 
 colorname = ['black','yellow', 'gold', 'orange', 'red', 'maroon', 'violet', 'magenta', 'purple', 'navy', 'blue', 'skyblue', 'cyan', 'turquoise', 'lightgreen', 'green', 'darkgreen', 'chocolate', 'brown', 'gray']
 
@@ -49,7 +51,7 @@ RectangleWidth = 50
 CircleSize = 100
 TriangleSize = 100
 Rectangle = [RectangleLength, RectangleWidth]
-RectListIndex = 0
+RectListIndex = 0       
 RectangleSizeMod = 'Rectangle Length'
 
 #Luis
@@ -335,8 +337,10 @@ def MousePos(x,y):
 #Luis
 #freedraw function
 def Draw(x, y):
+    global Drawing
     if (InitDone == True):
         if (y < 160):
+            Drawing = True
             brush.ondrag(None)
             brush.goto(x, y)
             brush.pendown()
@@ -881,7 +885,10 @@ def mouseClicked(x,y):
             MousePos(x,y)
 
 def PenUpBrush(x,y):
-    brush.penup()
+    global Drawing
+    if (Drawing == True):
+        brush.penup()
+        Drawing = False
 
 #Luis
 #on click return cordinates
