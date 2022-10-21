@@ -10,7 +10,7 @@ brush = t.Turtle()
 writeT = Turtle()
 writeT.penup()
 writeT.goto(50, -240)
-turtles = ['brush','Init_T','SquareT','RectangleT','CircleT','TriangleT']
+turtles = ['brush','Init_T','SquareT','CircleT', 'RectangleT','TriangleT']
 turtles[2] = Turtle()
 turtles[3] = Turtle()
 turtles[4] = Turtle()
@@ -36,11 +36,12 @@ TriangleSpawnActive = False
 RectangleSpawnActive = False
 SquareSize = 100
 RectangleLength = 100
-RectangleWidth = 100
+RectangleWidth = 50
 CircleSize = 100
 TriangleSize = 100
-RectangleSize = RectangleLength
-RectangleSizeMod = 'Length'
+Rectangle = [RectangleLength, RectangleWidth]
+RectListIndex = 0
+RectangleSizeMod = 'Rectangle Length'
 
 #do this
 #if(LengthActive == True):
@@ -99,8 +100,10 @@ def MousePos(x,y):
     global RectangleLength
     global RectangleWidth
     global TriangleSize
-    global RectangleSize
-    if (x > -760 and x < -660 and y < -205 and y > -255):
+    global Rectangle
+    global RectListIndex
+    global RectangleSizeMod
+    if (x > -760 and x < -660 and y < 385 and y > 335):
 
  
         if (SquareSpawnActive == False):
@@ -119,7 +122,7 @@ def MousePos(x,y):
             print('prompted user to click on canvas')
 
     #check if rectangle button is clicked
-    elif (x > -540 and x < -440 and y < -205 and y > -255):
+    elif (x > -540 and x < -440 and y < 385 and y > 335):
 
         if (RectangleSpawnActive == False):
                 RectangleSpawnActive = True
@@ -135,39 +138,45 @@ def MousePos(x,y):
                 writeT.write('Click on the canvas to draw rectangle', align = "center",font = ('Arial', 10, 'normal'))
                 print('prompted user to click on canvas')
 
-        # if (y1 >= -100):
-        #     rectangle(x = x1, y = y1, length = 100, width = 50, color = 'black', pen_thickness = pensize, turtle = brush)
-        # else: 
-        #     brush.write('too close to the border to produce rectangle', align = "center",font = ('Arial', 10, 'normal'))
-        #     #pause for 2 seconds then delete text
-        #     wn.ontimer(undoB(1), t = 1000)
     #check if circle button is clicked
-    elif (x > -650 and x < -550 and y < -205 and y > -255):
-        #save turtle x and y position as variables
-        x1 = brush.xcor()
-        y1 = brush.ycor()
-        if (y1 >= -100):
-            circle(x = x1, y = y1, radius = 50, color = 'black', pen_thickness = pensize, turtle = brush)
-        else: 
-            brush.write('too close to the border to produce circle', align = "center",font = ('Arial', 10, 'normal'))
-            #pause for 2 seconds then delete text
-            wn.ontimer(undoB(1), t = 2000)
+    elif (x > -650 and x < -550 and y < 385 and y > 335):
+            
+            if (CircleSpawnActive == False):
+                CircleSpawnActive = True
+                print('circle spawn active')
+    
+                ShapeSpawnClick = True
+                SpawnSquare = False
+                SpawnCircle = True
+                SpawnTriangle = False
+                SpawnRectangle = False
+    
+                writeT.goto(50,-240)
+                writeT.write('Click on the canvas to draw circle', align = "center",font = ('Arial', 10, 'normal'))
+                print('prompted user to click on canvas')
+
     #check if triangle button is clicked
-    elif (x > -430 and x < -330 and y < -205 and y > -255):
-        #save turtle x and y position as variables
-        x1 = brush.xcor()
-        y1 = brush.ycor()
-        if (y1 >= -100):
-            triangle(x = x1, y = y1, length = 100, color = 'black', pen_thickness = pensize, turtle = brush)
-        else: 
-            brush.write('too close to the border to produce triangle', align = "center",font = ('Arial', 10, 'normal'))
-            #pause for 2 seconds then delete text
-            wn.ontimer(brush.undo(), t = 2000)
+    elif (x > -430 and x < -330 and y < 385 and y > 335):
+
+        if (TriangleSpawnActive == False):
+            TriangleSpawnActive = True
+            print('triangle spawn active')
+
+            ShapeSpawnClick = True
+            SpawnSquare = False
+            SpawnCircle = False
+            SpawnTriangle = True
+            SpawnRectangle = False
+
+            writeT.goto(50,-240)
+            writeT.write('Click on the canvas to draw triangle', align = "center",font = ('Arial', 10, 'normal'))
+            print('prompted user to click on canvas')
+
     #check if clear button is clicked
-    elif (x > -320 and x < -220 and y < -205 and y > -255):
+    elif (x > -320 and x < -220 and y < 385 and y > 335):
         brush.clear()
     #check if undo button is clicked
-    elif (x > -210 and x < -110 and y < -205 and y > -255):
+    elif (x > -210 and x < -110 and y < 385 and y > 335):
         undoB(5)
 
     #check square sizer
@@ -175,6 +184,8 @@ def MousePos(x,y):
     #check if square size -1 button is clicked
     elif (x > 45 and x < 115 and y < 330 and y > 280):
         SquareSize -= 1
+        if (SquareSize < 0):
+            SquareSize = 0
         print(SquareSize)
         turtles[1].clear()
         turtles[1].write("Square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
@@ -187,6 +198,8 @@ def MousePos(x,y):
     #check if square size -10 button is clicked
     elif (x > 45 and x < 115 and y < 275 and y > 225):
         SquareSize -= 10
+        if SquareSize < 0:
+            SquareSize = 0
         print(SquareSize)
         turtles[1].clear()
         turtles[1].write("Square Size " + str(SquareSize), align = "center",font = ('Arial', 10, 'normal'))
@@ -203,99 +216,121 @@ def MousePos(x,y):
     #check if circle size -1 button is clicked
     elif (x > 205 and x < 275 and y < 330 and y > 280):
         CircleSize -= 1
-        print(CircleSize)
-        turtles[3].clear()
-        turtles[3].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
+        if (CircleSize < 0):
+            CircleSize = 0
+        print('Circle Size' + str(CircleSize))
+        turtles[2].clear()
+        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
     #check if circle size +1 button is clicked
     elif (x > 285 and x < 355 and y < 330 and y > 280):
         CircleSize += 1
-        print(CircleSize)
-        turtles[3].clear()
-        turtles[3].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
+        print('Circle Size' + str(CircleSize))
+        turtles[2].clear()
+        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
     #check if circle size -10 button is clicked
     elif (x > 205 and x < 275 and y < 275 and y > 225):
         CircleSize -= 10
-        print(CircleSize)
-        turtles[3].clear()
-        turtles[3].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
+        if(CircleSize < 0):
+            CircleSize = 0
+        print('Circle Size' + str(CircleSize))
+        turtles[2].clear()
+        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
     #check if circle size +10 button is clicked
     elif (x > 285 and x < 355 and y < 275 and y > 225):
         CircleSize += 10
-        print(CircleSize)
-        turtles[3].clear()
-        turtles[3].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
+        print('Circle Size' + str(CircleSize))
+        turtles[2].clear()
+        turtles[2].write("Circle Size " + str(CircleSize), align = "center",font = ('Arial', 10, 'normal'))
 
     #check rectangle sizer
 
     #check if changing from rectangle width to rectangle length
-    elif (x > 365 and x < 515 and y < 220 and y > 170): 
-        if (RectangleSize == RectangleLength):
-            RectangleSize = RectangleWidth
-            RectangleSizeMod = 'Width'
+    elif (x > 355 and x < 505 and y < 220 and y > 170): 
+        if (RectListIndex == 0):
+            print(Rectangle[RectListIndex])
+            RectListIndex = 1
+            RectangleSizeMod = 'Rectangle Width'
             turtles[3].clear()
-            turtles[3].write("Rectangle Width " + str(RectangleSize), align = "center",font = ('Arial', 10, 'normal'))
-        else:
-            RectangleSize = RectangleLength
-            RectangleSizeMod = 'Length'
+            turtles[3].write("Rectangle Width " + str(Rectangle[RectListIndex]), align = "center",font = ('Arial', 10, 'normal'))
+            print('Rectangle Width ' + str(Rectangle[RectListIndex]))
+        elif (RectListIndex == 1):
+            RectListIndex = 0
+            RectangleSizeMod = 'Rectangle Length'
             turtles[3].clear()
-            turtles[3].write("Rectangle Length " + str(RectangleSize), align = "center",font = ('Arial', 10, 'normal'))
+            turtles[3].write("Rectangle Length " + str(Rectangle[RectListIndex]), align = "center",font = ('Arial', 10, 'normal'))
+            print('Rectangle Length ' + str(Rectangle[RectListIndex]))
             
     #check if rectangle size -1 button is clicked
     elif (x > 365 and x < 435 and y < 330 and y > 280):
-        RectangleSize -= 1
-        print(RectangleSize)
-        turtles[2].clear()
-        turtles[2].write(RectangleSizeMod + str(RectangleSize), align = "center",font = ('Arial', 10, 'normal'))
+        Rectangle[RectListIndex] -= 1
+        if (Rectangle[RectListIndex] < 0):
+            Rectangle[RectListIndex] = 0
+        print('width ' + str(Rectangle[1]))
+        print('length' + str(Rectangle[0]))
+        turtles[3].clear()
+        turtles[3].write(RectangleSizeMod + ' ' + str(Rectangle[RectListIndex]), align = "center",font = ('Arial', 10, 'normal'))
     #check if rectangle size +1 button is clicked
     elif (x > 445 and x < 515 and y < 330 and y > 280):
-        RectangleSize += 1
-        print(RectangleSize)
-        turtles[2].clear()
-        turtles[2].write(RectangleSizeMod + str(RectangleSize), align = "center",font = ('Arial', 10, 'normal'))
+        Rectangle[RectListIndex] += 1
+        print('width ' + str(Rectangle[1]))
+        print('length' + str(Rectangle[0]))
+        turtles[3].clear()
+        turtles[3].write(RectangleSizeMod + ' ' + str(Rectangle[RectListIndex]), align = "center",font = ('Arial', 10, 'normal'))
     #check if rectangle size -10 button is clicked
     elif (x > 365 and x < 435 and y < 275 and y > 225):
-        RectangleSize -= 10
-        print(RectangleSize)
-        turtles[2].clear()
-        turtles[2].write(RectangleSizeMod + str(RectangleSize), align = "center",font = ('Arial', 10, 'normal'))
+        Rectangle[RectListIndex] -= 10
+        if (Rectangle[RectListIndex] < 0):
+            Rectangle[RectListIndex] = 0
+        print('width ' + str(Rectangle[1]))
+        print('length' + str(Rectangle[0]))
+        turtles[3].clear()
+        turtles[3].write(RectangleSizeMod + ' ' + str(Rectangle[RectListIndex]), align = "center",font = ('Arial', 10, 'normal'))
     #check if rectangle size +10 button is clicked
     elif (x > 445 and x < 515 and y < 275 and y > 225):
-        RectangleSize += 10
-        print(RectangleSize)
-        turtles[2].clear()
-        turtles[2].write(RectangleSizeMod + str(RectangleSize), align = "center",font = ('Arial', 10, 'normal'))
+        Rectangle[RectListIndex] += 10
+        print('width ' + str(Rectangle[1]))
+        print('length' + str(Rectangle[0]))
+        turtles[3].clear()
+        turtles[3].write(RectangleSizeMod + ' ' + str(Rectangle[RectListIndex]), align = "center",font = ('Arial', 10, 'normal'))
     
     #check triangle sizer
     
     #check if TriangleSize -1 button is clicked
     elif (x > 510 and x < 580 and y < 330 and y > 280):
         TriangleSize -= 1
+        if(TriangleSize < 0):
+            TriangleSize = 0
         print(TriangleSize)
+        print('Triangle Size ' + str(TriangleSize))
         turtles[4].clear()
         turtles[4].write("Triangle Size " + str(TriangleSize), align = "center",font = ('Arial', 10, 'normal'))
     #check if TriangleSize +1 button is clicked
     elif (x > 590 and x < 660 and y < 330 and y > 280):
         TriangleSize += 1
         print(TriangleSize)
+        print('Triangle Size ' + str(TriangleSize))
         turtles[4].clear()
         turtles[4].write("Triangle Size " + str(TriangleSize), align = "center",font = ('Arial', 10, 'normal'))
     #check if triangle size -10 button is clicked
     elif (x > 510 and x < 580 and y < 275 and y > 225):
         TriangleSize -= 10
-        print(TriangleSize)
+        if(TriangleSize < 0):
+            TriangleSize = 0
+        print('Triangle Size ' + str(TriangleSize))
         turtles[4].clear()
         turtles[4].write("Triangle Size " + str(TriangleSize), align = "center",font = ('Arial', 10, 'normal'))
     #check if triangle size +10 button is clicked
     elif (x > 590 and x < 660 and y < 275 and y > 225):
         TriangleSize += 10
-        print(TriangleSize)
+        print('Triangle Size ' + str(TriangleSize))
         turtles[4].clear()
         turtles[4].write("Triangle Size " + str(TriangleSize), align = "center",font = ('Arial', 10, 'normal'))
+        
 
         
 #freedraw function
 def Draw(x, y):
-    if (y > -200):
+    if (y < 1690):
         brush.ondrag(None)
         brush.pensize(pensize)
         brush.pendown()
@@ -362,11 +397,11 @@ def SquareSpawn(turtle,x,y, size):
 
     turtle.setheading(0)
     turtle.pensize(pensize)
-    minY = -200 + size
-    print(minY)
+    maxY = 160 - size
+    print(maxY)
 
 
-    if (y > minY):
+    if (y < maxY):
         turtle.penup()
         turtle.goto(x,y)
         turtle.pendown()
@@ -377,8 +412,8 @@ def SquareSpawn(turtle,x,y, size):
         undoW(1)
         ShapeSpawnClick = False
         SquareSpawnActive = False
-    elif (y < minY ):
-        if (y > -200):
+    elif (y > maxY ):
+        if (y < 160):
             writeT.goto(x,y+20)
             writeT.write('too close to the border to produce square', align = "center",font = ('Arial', 10, 'normal'))
             #pause for 2 seconds then delete text
@@ -397,27 +432,89 @@ def RectangleSpawn(turtle,x,y, length, width):
 
     turtle.setheading(0)
     turtle.pensize(pensize)
-    minY = -200 + width
+    maxY = 160 - length
 
-    if (y > minY):
+    if (y < maxY):
         turtle.penup()
         turtle.goto(x,y)
         turtle.pendown()
         for i in range(2):
-            turtle.forward(length)
-            turtle.right(90)
             turtle.forward(width)
+            turtle.right(90)
+            turtle.forward(length)
             turtle.right(90)
         turtle.penup()
         undoW(1)
         ShapeSpawnClick = False
         RectangleSpawnActive = False
-    else:
-        writeT.goto(x,y+20)
-        writeT.write('too close to the border to produce rectangle', align = "center",font = ('Arial', 10, 'normal'))
-        #pause for 2 seconds then delete text
-        wn.ontimer(writeT.undo(), t = 1000)
-        writeT.undo()
+    elif (y > maxY ):
+        if (y < 160):
+            writeT.goto(x,y+20)
+            writeT.write('too close to the border to produce rectangle', align = "center",font = ('Arial', 10, 'normal'))
+            #pause for 2 seconds then delete text
+            wn.ontimer(writeT.undo(), t = 1000)
+            writeT.undo()
+
+def CircleSpawn(turtle,x,y, radius):
+
+    global CircleSpawnActive
+    global ShapeSpawnClick
+    global SpawnRectangle
+    global SpawnSquare
+    global SpawnCircle
+    global SpawnTriangle
+
+    turtle.setheading(0)
+    turtle.pensize(pensize)
+    maxY = 160 - radius
+
+    if (y < maxY):
+        turtle.penup()
+        turtle.goto(x,y)
+        turtle.pendown()
+        turtle.circle(radius)
+        turtle.penup()
+        undoW(1)
+        ShapeSpawnClick = False
+        CircleSpawnActive = False
+    elif (y > maxY ):
+        if (y < 160):
+            writeT.goto(x,y+20)
+            writeT.write('too close to the border to produce circle', align = "center",font = ('Arial', 10, 'normal'))
+            #pause for 2 seconds then delete text
+            wn.ontimer(writeT.undo(), t = 1000)
+            writeT.undo()
+        
+def TriangleSpawn(turtle,x,y, size):
+    
+        global TriangleSpawnActive
+        global ShapeSpawnClick
+        global SpawnRectangle
+        global SpawnSquare
+        global SpawnCircle
+        global SpawnTriangle
+    
+        turtle.setheading(0)
+        turtle.pensize(pensize)
+        maxY = 160 - size
+    
+        if (y < maxY):
+            turtle.penup()
+            turtle.goto(x,y)
+            turtle.pendown()
+            for i in range(3):
+                turtle.forward(size)
+                turtle.right(120)
+            turtle.penup()
+            undoW(1)
+            ShapeSpawnClick = False
+            TriangleSpawnActive = False
+        else:
+            writeT.goto(x,y+20)
+            writeT.write('too close to the border to produce triangle', align = "center",font = ('Arial', 10, 'normal'))
+            #pause for 2 seconds then delete text
+            wn.ontimer(writeT.undo(), t = 1000)
+            writeT.undo()
 
 
 #rectangle init function
@@ -467,6 +564,9 @@ def triangle(turtle, x, y, length, color, pen_thickness):
 #initializes the program and sets up buttons
 def init():
     global InitDone
+
+    
+
     turtles[1] = t.Turtle()
     turtles[1].penup()
     turtles[1].goto(-770, 160)
@@ -503,7 +603,7 @@ def init():
         turtles[i].goto(120 + shapetype, 351.66)
         shape = ['Square Size', 'Circle Size', 'Rectangle Length', 'Triangle Size']
         rectangle(turtles[1], 45 + shapetype, 385, 150, 50, 'black', 1)
-        turtles[i].write(shape[i-2] + str(shapesize), align = "center",font = ('Arial', 10, 'normal'))
+        turtles[i].write(shape[i-2] + '100', align = "center",font = ('Arial', 10, 'normal'))
         rectangle(turtles[1], 45 + shapetype, 330, 70, 50, 'black', 1)
         turtles[1].goto(80 + shapetype, 296.66)
         turtles[1].write('-1', align = "center",font = ('Arial', 10, 'normal'))
@@ -581,15 +681,20 @@ def mouseClicked(x,y):
             if (SpawnSquare == True):
                 print('square')
                 print('{},{}'.format(x,y))
-                SquareSpawn(brush,x,y,shapesize)
+                SquareSpawn(brush,x,y,SquareSize)
             elif (SpawnCircle == True):
-                CircleSpawn(x,y)
+                print('circle')
+                print('{},{}'.format(x,y))
+                CircleSpawn(brush,x,y,CircleSize)
             elif (SpawnRectangle == True):
                 print('Rectangle')
                 print('{},{}'.format(x,y))
-                RectangleSpawn(brush,x,y,length=100,width=50)
+                print(Rectangle[0], Rectangle[1])
+                RectangleSpawn(brush,x,y, Rectangle[0], Rectangle[1])
             elif (SpawnTriangle == True):
-                TriangleSpawn(x,y)
+                print('Triangle')
+                print('{},{}'.format(x,y))
+                TriangleSpawn(brush,x,y,TriangleSize)
         else:
             MousePos(x,y)
 
