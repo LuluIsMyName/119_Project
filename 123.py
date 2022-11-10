@@ -46,7 +46,7 @@ def replaceApple(i):
   t_list[i].showturtle()
   randomLetter = random.choice(letter_list)
   letter_list.remove(randomLetter)
-  chosen_letters.append(randomLetter)
+  chosen_letters[i] = randomLetter
   
   t_list[i].write(randomLetter, font=("Arial", 16, "normal"))
 
@@ -79,7 +79,6 @@ def dropApple(letter):
             while (t_list[i].ycor() > -150):
                 t_list[i].forward(10)
             letter_list.append(chosen_letters[i])
-            chosen_letters.remove(chosen_letters[i])
             replaceApple(i)
             break
 
